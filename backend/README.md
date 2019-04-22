@@ -5,7 +5,17 @@
 처음 Repository를 clone했다면, 콘솔 창에 다음을 입력해 가상환경을 구축해주세요.
 
 ```
+$ cd backend
 $ python -m pip install pipenv
 $ pipenv install
 $ pipenv shell
+```
+
+# Running Project
+
+```
+$ cd backend
+$ pipenv shell
+$ cd src
+$ python manage.py runserver
 ```
