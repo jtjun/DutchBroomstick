@@ -14,7 +14,10 @@ class UserSerializer(serializers.ModelSerializer):
         }
     
     def create(self, validated_data):
-        profile_data = validated_data.pop('profile')
+        try:
+            profile_data = validated_data.pop('profile')
+        except KeyError:
+            profile_data = {}
 
         user = User.objects.create(**validated_data)
         Profile.objects.create(user=user, **profile_data)
