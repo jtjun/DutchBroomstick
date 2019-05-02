@@ -99,7 +99,6 @@
     "styled-theme": "^0.3.0",
     "styled-tools": "^0.4.0",
     "validator": "^9.0.0",
-    "victor": "^1.1.0",
     "whatwg-fetch": "^2.0.2"
   }
 }
