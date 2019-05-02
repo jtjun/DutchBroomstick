@@ -2,9 +2,11 @@ language: python
 python: 
   - "3.7" 
 
-install:  
-#  - pip install Twisted
-#  - python setup.py install
+before_install:
+  - "cd backend"
+install:
+  - "pip install pipenv"
+  - "pipenv install"
 
 script:
 #  - trial
