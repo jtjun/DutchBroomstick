@@ -1,13 +1,15 @@
-language: python
-dist: xenial
-python: 
-  - "3.7" 
-
-before_install:
-  - "cd backend"
-install:
-  - "pip install pipenv"
-  - "pipenv install"
-
-script:
-  - pipenv run python src/manage.py test
+matrix:
+  include:
+    - language: python
+      dist: xenial
+      python: 3.7
+      before_install:
+        - cd backend
+      install:
+        - pip install pipenv
+        - pipenv install
+      script:
+        - pipenv run python src/manage.py test
+    - language: node_js
+      before_install:
+        - cd frontend
