@@ -10,4 +10,4 @@ install:
   - "pipenv install"
 
 script:
-#  - trial
+  - pipenv run python src/manage.py test
