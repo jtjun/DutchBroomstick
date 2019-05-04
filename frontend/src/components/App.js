@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { injectGlobal, ThemeProvider } from 'styled-components'
-import { MainPage, UserPage, SignUpForm } from 'containers'
+import { MainPage, UserPage, SignUpPage } from 'containers'
 
 // https://github.com/diegohaz/arc/wiki/Styling
 import theme from './themes/default'
@@ -21,7 +21,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Switch>
         <Route path="/" component={MainPage} exact />
-        <Route path="/signup/" component={SignUpForm} exact />
+        <Route path="/signup/" component={SignUpPage} exact />
         <Route path="/user/:id/" component={UserPage} />
       </Switch>
     </ThemeProvider>
