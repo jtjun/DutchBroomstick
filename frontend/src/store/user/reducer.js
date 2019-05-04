@@ -3,6 +3,9 @@ import {
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILED,
   USER_SIGNOUT,
+  USER_SIGNUP_REQUEST,
+  USER_SIGNUP_SUCCESS,
+  USER_SIGNUP_FAILED,
 } from 'store/actions'
 
 const initialState = {
@@ -29,6 +32,21 @@ const userReducer = (state = initialState, action) => {
         ...initialState,
       }
     case USER_SIGNOUT:
+      return {
+        ...initialState,
+      }
+    case USER_SIGNUP_REQUEST:
+      return {
+        ...state,
+        username: action.username,
+      }
+    case USER_SIGNUP_SUCCESS:
+      return {
+        ...state,
+        token: action.token,
+        signedIn: true,
+      }
+    case USER_SIGNUP_FAILED:
       return {
         ...initialState,
       }

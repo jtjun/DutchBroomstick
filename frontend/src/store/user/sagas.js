@@ -5,8 +5,8 @@ import api from 'services/api'
  * https://github.com/diegohaz/arc/wiki/Sagas
  */
 
-import { USER_LOGIN_REQUEST } from './actions'
-import { userLoginSuccess, userLoginFailed } from './actions'
+import { USER_LOGIN_REQUEST, USER_SIGNUP_REQUEST } from './actions'
+import { userLoginSuccess, userLoginFailed, userSignUpSuccess, userSignUpFailed } from './actions'
 
 function* userLoginRequest() {
   yield put(userLoginSuccess("RANDOM_TOKEN"))  // fake Login
@@ -21,6 +21,16 @@ function* watchUserLoginRequest() {
   yield takeEvery(USER_LOGIN_REQUEST, userLoginRequest)
 }
 
+function* userSignUpRequest() {
+
+  yield put(userSignUpSuccess("RANDOM_TOKEN"))  // fake SignUp **have to act like login
+}
+
+function* watchUserSignUpRequest() {
+
+  yield takeEvery(USER_SIGNUP_REQUEST, userSignUpRequest)
+}
 export default function* () {
   yield fork(watchUserLoginRequest)
+  yield fork(watchUserSignUpRequest)
 }
