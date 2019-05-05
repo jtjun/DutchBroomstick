@@ -19,6 +19,9 @@ class UserSerializer(serializers.ModelSerializer):
         except KeyError:
             profile_data = {}
 
-        user = User.objects.create(**validated_data)
+        user = User(**validated_data)
+        user.set_password(validated_data.get('password'))
+        user.save()
+
         Profile.objects.create(user=user, **profile_data)
         return user

@@ -6,9 +6,12 @@ import api from 'services/api'
  */
 
 import { USER_LOGIN_REQUEST, USER_SIGNUP_REQUEST } from './actions'
-import { userLoginSuccess, userLoginFailed, userSignUpSuccess, userSignUpFailed } from './actions'
+import {
+  userLoginRequest, userLoginSuccess, userLoginFailed,
+  userSignUpSuccess, userSignUpFailed
+} from './actions'
 
-function* userLoginRequest({ username, password }) {
+function* handleUserLoginRequest({ username, password }) {
   try {
     const response = yield api.post('/token/', { username, password })
     yield put(userLoginSuccess(response.token))
@@ -23,18 +26,26 @@ function* watchUserLoginRequest() {
    * https://redux-saga.js.org/docs/api/#takeeverypattern-saga-args
    */
 
-  yield takeEvery(USER_LOGIN_REQUEST, userLoginRequest)
+  yield takeEvery(USER_LOGIN_REQUEST, handleUserLoginRequest)
 }
 
-function* userSignUpRequest() {
-
-  yield put(userSignUpSuccess("RANDOM_TOKEN"))  // fake SignUp **have to act like login
+function* handleUserSignUpRequest({ username, password, passwordRepeat }) {
+  if (password !== passwordRepeat) {
+    yield put(userSignUpFailed({ passwordRepeat: ['password !== passwordRepeat'] }))
+  } else {
+    try {
+      const response = yield api.post('/users/', { username, password })
+      yield put(userLoginRequest(username, password))
+    } catch (e) {
+      yield put(userSignUpFailed(yield e.response.json()))
+    }
+  }
 }
 
 function* watchUserSignUpRequest() {
-
-  yield takeEvery(USER_SIGNUP_REQUEST, userSignUpRequest)
+  yield takeEvery(USER_SIGNUP_REQUEST, handleUserSignUpRequest)
 }
+
 export default function* () {
   yield fork(watchUserLoginRequest)
   yield fork(watchUserSignUpRequest)
