@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 import { SignUpForm } from 'containers'
 
 const SignUpPage = (props) => {
@@ -6,7 +8,7 @@ const SignUpPage = (props) => {
     <div>
       <h1>더치 빗자루</h1>
       <SignUpForm />
-      <button>로그인</button>
+      <Link to="/"><button>로그인</button></Link>
     </div>
   )
 }

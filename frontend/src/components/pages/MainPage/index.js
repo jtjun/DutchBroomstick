@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 /**
  * import할 때 복잡하게 상대참조 할 필요 없이 'components', 'containers'만 지정해주면 된다.
@@ -17,7 +18,7 @@ const MainPage = (props) => {
     <div>
       <h1>더치 빗자루</h1>
       <LoginForm />
-      <button>회원가입</button>
+      <Link to="/signup"><button>회원가입</button></Link>
     </div>
   )
 }
