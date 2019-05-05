@@ -8,8 +8,13 @@ import api from 'services/api'
 import { USER_LOGIN_REQUEST, USER_SIGNUP_REQUEST } from './actions'
 import { userLoginSuccess, userLoginFailed, userSignUpSuccess, userSignUpFailed } from './actions'
 
-function* userLoginRequest() {
-  yield put(userLoginSuccess("RANDOM_TOKEN"))  // fake Login
+function* userLoginRequest({ username, password }) {
+  try {
+    const response = yield api.post('/token/', { username, password })
+    yield put(userLoginSuccess(response.token))
+  } catch (e) {
+    yield put(userLoginFailed(yield e.response.json()))
+  }
 }
 
 function* watchUserLoginRequest() {
