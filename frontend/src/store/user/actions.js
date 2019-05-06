@@ -61,6 +61,7 @@ export const userSignUpFailed = error => ({
   error,
 })
 
+
 /*User Info Change Action */
 export const USER_INFO_CHANGE_REQUEST = "USER_INFO_CHANGE_REQUEST"
 

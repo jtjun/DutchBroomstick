@@ -1,10 +1,16 @@
-language: python
-python: 
-  - "3.7" 
-
-install:  
-#  - pip install Twisted
-#  - python setup.py install
-
-script:
-#  - trial
+matrix:
+  include:
+    - language: python
+      dist: xenial
+      python: 3.7
+      before_install:
+        - cd backend
+      install:
+        - pip install pipenv
+        - pipenv install
+      script:
+        - pipenv run python src/manage.py test
+    - language: node_js
+      node_js: 8
+      before_install:
+        - cd frontend
