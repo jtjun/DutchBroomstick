@@ -6,7 +6,7 @@ import api from 'services/api'
  */
 
 import { USER_LOGIN_REQUEST, USER_SIGNUP_REQUEST, USER_INFO_CHANGE_REQUEST } from './actions'
-import { userLoginSuccess, userLoginFailed, userSignUpSuccess, userSignUpFailed,  } from './actions'
+import { userLoginSuccess, userLoginFailed, userSignUpSuccess, userSignUpFailed } from './actions'
 
 function* userLoginRequest() {
   yield put(userLoginSuccess("RANDOM_TOKEN"))  // fake Login
@@ -31,14 +31,17 @@ function* watchUserSignUpRequest() {
   yield takeEvery(USER_SIGNUP_REQUEST, userSignUpRequest)
 }
 
-function* iuserInfoChangeRequest(){ // 이럴때 이름 어떻게 해줘야 하지?
+function* userInfoChangeRequest() {
+  //
+}
 
-  yield post(USER_INFO_CHANGE_REQUEST, userInfoChangeRequest)
+function* watchUserInfoChangeRequest() {
+  yield takeEvery(USER_INFO_CHANGE_REQUEST, userInfoChangeRequest)
 }
 
 export default function* () {
   yield fork(watchUserLoginRequest)
   yield fork(watchUserSignUpRequest)
-  yield fork(iuserInfoChangeRequest)
+  yield fork(watchUserInfoChangeRequest)
 }
 
