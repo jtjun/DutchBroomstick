@@ -5,7 +5,7 @@ import api from 'services/api'
  * https://github.com/diegohaz/arc/wiki/Sagas
  */
 
-import { USER_LOGIN_REQUEST, USER_SIGNUP_REQUEST } from './actions'
+import { USER_LOGIN_REQUEST, USER_SIGNUP_REQUEST, USER_INFO_CHANGE_REQUEST } from './actions'
 import {
   userLoginRequest, userLoginSuccess, userLoginFailed,
   userSignUpSuccess, userSignUpFailed
@@ -46,7 +46,18 @@ function* watchUserSignUpRequest() {
   yield takeEvery(USER_SIGNUP_REQUEST, handleUserSignUpRequest)
 }
 
+
+function* userInfoChangeRequest() {
+  //
+}
+
+function* watchUserInfoChangeRequest() {
+  yield takeEvery(USER_INFO_CHANGE_REQUEST, userInfoChangeRequest)
+}
+
 export default function* () {
   yield fork(watchUserLoginRequest)
   yield fork(watchUserSignUpRequest)
+  yield fork(watchUserInfoChangeRequest)
 }
+
