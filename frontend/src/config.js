@@ -6,7 +6,7 @@ const config = {
     isDev: process.env.NODE_ENV !== 'production',
     basename: process.env.PUBLIC_PATH,
     isBrowser: typeof window !== 'undefined',
-    apiUrl: 'https://jsonplaceholder.typicode.com',
+    apiUrl: 'http://127.0.0.1:8000/api',
   },
   test: {},
   development: {},

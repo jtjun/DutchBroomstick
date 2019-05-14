@@ -27,6 +27,9 @@
       "src-example",
       "node_modules"
     ],
+    "testPathIgnorePatterns": [
+      "src-example"
+    ],
     "moduleNameMapper": {
       "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/private/jest/fileMock.js",
       "^(components|containers)$": "<rootDir>/private/jest/componentsMock.js",
@@ -35,7 +38,8 @@
     },
     "setupFiles": [
       "<rootDir>/private/jest/setupTests.js"
-    ]
+    ],
+    "testURL": "http://127.0.0.1:3000/"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.0.0",
@@ -80,6 +84,7 @@
   "dependencies": {
     "babel-polyfill": "^6.20.0",
     "history": "^4.6.1",
+    "jest": "^24.8.0",
     "lodash": "^4.17.4",
     "normalizr": "3.2.4",
     "prop-types": "^15.5.8",
@@ -99,6 +104,7 @@
     "styled-theme": "^0.3.0",
     "styled-tools": "^0.4.0",
     "validator": "^9.0.0",
+    "victor": "^1.1.0",
     "whatwg-fetch": "^2.0.2"
   }
 }
