@@ -7,4 +7,10 @@ urlpatterns = [
     path('users/', views.UserCreateView.as_view()),
     path('users/<str:username>/', views.UserDetailView.as_view()),
     path('token/', obtain_auth_token),
+
+    path('<str:username>/rooms/', views.RoomCreateView.as_view()),
+    path('<str:username>/rooms/<str:roomname>/', views.RoomDetailView.as_view()),
+
+    path('<str:username>/rooms/<str:roomname>/members/', views.MemberCreateView.as_view()),
+    path('<str:username>/rooms/<str:roomname>/members/<str:name>', views.MemberDetailView.as_view()),
 ]
