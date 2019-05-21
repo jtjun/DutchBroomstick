@@ -22,8 +22,8 @@ const App = () => {
       <Switch>
         <Route path="/" component={MainPage} exact />
         <Route path="/signup/" component={SignUpPage} exact />
-        <Route path="/user/:id/" component={UserPage} />
-        <Route path="/user/:id/setting/" component={UserInfoPage} />
+        <Route path="/user/:id/" component={UserPage} exact />
+        <Route path="/user/:id/setting/" component={UserInfoPage} exact />
       </Switch>
     </ThemeProvider>
   )
