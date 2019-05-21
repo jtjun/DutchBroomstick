@@ -73,7 +73,6 @@ const config = createConfig([
       headers: { 'Access-Control-Allow-Origin': '*' },
       host,
       port,
-      disableHostCheck: true,
     }),
     sourceMaps(),
     addPlugins([

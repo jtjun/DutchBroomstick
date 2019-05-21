@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 
 /**
  * Presentational Components의 경우 redux 로직을 배제한다 (cf. pages/MainPage/index.js)
@@ -13,9 +12,7 @@ const UserPage = ({username, onClickUserInfo, onClickSignOut}) => (
         <button>방 생성</button>
         {rooms.map(r => <Room />)}
       */}
-    <Link to={`/user/${username}/setting`}>
-      <button onClick={onClickUserInfo}>유저 정보</button>
-    </Link>
+    <button onClick={onClickUserInfo}>유저 정보</button>
     <button onClick={onClickSignOut}>로그아웃</button>
   </div>
 )
