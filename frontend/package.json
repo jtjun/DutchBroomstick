@@ -13,7 +13,7 @@
     "lint": "eslint src src-example private webpack.config.js",
     "storybook": "start-storybook -p 9001 -c private/storybook",
     "storybook:example": "npm run env:example -- npm run storybook",
-    "dev": "npm run env:dev -- webpack-dev-server --host 0.0.0.0",
+    "dev": "npm run env:dev -- webpack-dev-server",
     "dev:example": "npm run env:example -- npm run dev",
     "build:clean": "rimraf \"dist/!(.git*|Procfile)**\"",
     "build:copy": "copyfiles -u 1 public/* public/**/* dist",

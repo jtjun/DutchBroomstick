@@ -8,7 +8,8 @@ import api from 'services/api'
 import { USER_LOGIN_REQUEST, USER_SIGNUP_REQUEST, USER_INFO_CHANGE_REQUEST } from './actions'
 import {
   userLoginRequest, userLoginSuccess, userLoginFailed,
-  userSignUpSuccess, userSignUpFailed
+  userSignUpSuccess, userSignUpFailed,
+  userInfoChangeFailed, userInfoChangeSuccess
 } from './actions'
 
 function* handleUserLoginRequest({ username, password }) {
@@ -47,8 +48,19 @@ function* watchUserSignUpRequest() {
 }
 
 
-function* userInfoChangeRequest() {
-  //
+function* userInfoChangeRequest({ username, password, passwordRepeat }) {
+  if(password !== passwordRepeat){
+    yield put(userInfoChangeFailed( {passwordRepeat: ['password !== passwordRepeat'] } ))
+  }
+  else{
+    try{
+      const response = yield api.put('/users/', { username, password })
+      yield put(userLoginRequest(username, password))
+    } catch (e){
+      yield put(userInfoChangeFailed(yield e.response.json()))
+    }
+  }
+
 }
 
 function* watchUserInfoChangeRequest() {
