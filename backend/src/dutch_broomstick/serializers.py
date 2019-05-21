@@ -35,18 +35,6 @@ class RoomSerializer(serializers.ModelSerializer):
         model = Room
         fields = ('roomname', 'owner')
 
-    def create(self, validated_data):
-        try:
-            room_data = validated_data.pop('room')
-        except KeyError:
-            room_data = {}
-
-        room = Room(**validated_data)
-        room.save()
-
-        Room.objects.create(**room_data)
-        return room
-
 
 class MemberSerializer(serializers.ModelSerializer):
     name = serializers.CharField(source="name")
@@ -57,15 +45,3 @@ class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
         fields = ('name', 'account', 'room', 'user')
-
-    def create(self, validated_data):
-        try:
-            member_data = validated_data.pop('member')
-        except KeyError:
-            member_data = {}
-
-        member = Member(**validated_data)
-        member.save()
-
-        Member.objects.create(**member_data)
-        return member

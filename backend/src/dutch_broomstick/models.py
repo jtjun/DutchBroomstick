@@ -10,11 +10,11 @@ class Profile(models.Model):
 class Room(models.Model):
     roomname = models.CharField(max_length=30, blank=False) # Room's name
     # Room's owner is always registered user
-    owner = models.OneToOneField(User, on_delete=models.CASCADE, null=False)
+    owner = models.OneToManyField(User, on_delete=models.CASCADE, null=False)
 
 class Member(models.Model):
     name = models.CharField(max_length=30, blank=False)
     account = models.CharField(blank=True)
-    room = models.OneToOneField(Room, on_delete=models.CASCADE, null=False)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True) # user is nullable
+    room = models.OneToManyField(Room, on_delete=models.CASCADE, null=False)
+    user = models.OneToManyField(User, on_delete=models.CASCADE, null=True) # user is nullable
 
