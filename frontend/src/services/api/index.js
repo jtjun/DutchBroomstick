@@ -3,6 +3,7 @@ import 'whatwg-fetch'
 import { stringify } from 'query-string'
 import merge from 'lodash/merge'
 import { apiUrl } from 'config'
+import { toastr } from 'react-redux-toastr'
 
 export const checkStatus = (response) => {
   if (response.ok) {
@@ -37,12 +38,19 @@ export const parseEndpoint = (endpoint, params) => {
   return `${url}${querystring}`
 }
 
+const handleError = (error) => {
+  if (error instanceof TypeError) {
+    toastr.light("네트워크 오류", error.message, { icon: 'error', status: 'error' })
+  }
+}
+
 const api = {}
 
 api.request = (endpoint, { params, ...settings } = {}) =>
   fetch(parseEndpoint(endpoint, params), parseSettings(settings))
     .then(checkStatus)
     .then(parseJSON)
+    .catch(handleError)
 
 ;['delete', 'get'].forEach((method) => {
   api[method] = (endpoint, settings) => api.request(endpoint, { method, ...settings })
