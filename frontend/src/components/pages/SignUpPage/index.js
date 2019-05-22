@@ -1,14 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { Block } from 'components'
 import { SignUpForm } from 'containers'
 
 const SignUpPage = (props) => {
   return (
     <div>
-      <h1>더치 빗자루</h1>
-      <SignUpForm />
-      <Link to="/"><button>로그인</button></Link>
+      <Block>
+        <h1>Dutch Broomstick</h1>
+        <SignUpForm />
+      </Block>
+      <Block>
+        <p>계정이 있다면? <Link to="/">로그인</Link></p>
+      </Block>
     </div>
   )
 }
