@@ -8,7 +8,7 @@ import theme from './themes/default'
 
 injectGlobal`
   body {
-    margin: 50px 0 0;
+    margin: 75px 0 0;
     background-color: #f6f6f6;
   }
 `
