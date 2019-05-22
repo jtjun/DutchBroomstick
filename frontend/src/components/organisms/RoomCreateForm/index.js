@@ -1,6 +1,7 @@
 import React from 'react'
 import { Field, FieldArray } from 'redux-form'
 import {toastr} from 'react-redux-toastr'
+import { Button, Input } from 'components'
 
 const renderField = ({ input, label, type }) => (
   <div>
@@ -14,19 +15,12 @@ const renderField = ({ input, label, type }) => (
 const renderMembers = ({ fields }) => (
   <ul>
     <li>
-      <button type="button" onClick={() => fields.push({})}>
+      <Button type="button" onClick={() => fields.push({})}>
         Add Member
-      </button>
+      </Button>
     </li>
     {fields.map((member, index) => (
       <li key={index}>
-        <button
-          type="button"
-          title="Remove Member"
-          onClick={() => fields.remove(index)}
-        >
-        remove
-        </button>
         <h4>Member #{index + 1}</h4>
         <Field
           name={`${member}.Name`}
@@ -34,6 +28,13 @@ const renderMembers = ({ fields }) => (
           component={renderField}
           label="Name"
         />
+        <Button
+          type="button"
+          title="Remove Member"
+          onClick={() => fields.remove(index)}
+        >
+        remove
+        </Button>
       </li>
     ))}
   </ul>
@@ -43,7 +44,6 @@ const RoomCreateForm = props => {
   const { handleSubmit,  reset } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <div><button onClick={() => toastr.confirm('The confirm message')}>toastrtest</button></div>
       <Field
         name="roomName"
         type="text"
@@ -52,11 +52,11 @@ const RoomCreateForm = props => {
       />
       <FieldArray name="users" component={renderMembers} />
       <div>
-        <button type="submit"
-        >Submit</button>
-        <button type="button" onClick={reset}>
+        <Button type="submit"
+        >Submit</Button>
+        <Button type="button" onClick={reset}>
           Clear Values
-        </button>
+        </Button>
       </div>
     </form>
   );
