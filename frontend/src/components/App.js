@@ -26,7 +26,8 @@ const App = () => {
         <Route path="/user/:id/" component={UserPage} />
         <Route path="/user/:id/setting/" component={UserInfoPage} />
         <Route path="/user/create_room/" component={RoomCreatePage} />
-        <Route path="/user/:room/entrance" component={EntrancePage} />
+        <Route path="/user/:room/entrance/" component={EntrancePage} />
+
       </Switch>
     </ThemeProvider>
   )
