@@ -26,8 +26,8 @@ const LoginForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Field name="username" type="text" placeholder="Username" component={Input} />
-      <Field name="password" type="password" placeholder="Password" component={Input} />
+      <Field name="username" type="text" placeholder="Username" component={Input} required />
+      <Field name="password" type="password" placeholder="Password" component={Input} required />
       <Button type="submit">Sign In</Button>
     </form>
   )

@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from 'styled-components'
 
 const Input = styled.input`
@@ -12,4 +13,14 @@ const Input = styled.input`
   width: 100%;
 `
 
-export default Input
+// for redux-form
+const InputField = ({ input, ...props }) => {
+  const { value, onChange } = input;
+  return (
+    <div>
+      <Input value={value} onChange={(e) => onChange(e.target.value)} {...props} />
+    </div>
+  )
+}
+
+export default InputField
