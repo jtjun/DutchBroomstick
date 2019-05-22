@@ -41,7 +41,7 @@ export const parseEndpoint = (endpoint, params) => {
 const handleError = (error) => {
   if (error instanceof TypeError) {
     toastr.light("네트워크 오류", error.message, { icon: 'error', status: 'error' })
-  }
+  } else throw error
 }
 
 const api = {}
