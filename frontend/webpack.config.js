@@ -33,6 +33,14 @@ const assets = () => () => ({
   },
 })
 
+const cssLoader = () => () => ({
+  module: {
+    rules: [
+      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+    ],
+  },
+})
+
 const resolveModules = modules => () => ({
   resolve: {
     modules: [].concat(modules, ['node_modules']),
@@ -63,6 +71,7 @@ const config = createConfig([
     babel(),
   ]),
   assets(),
+  cssLoader(),
   resolveModules(sourceDir),
 
   env('development', [

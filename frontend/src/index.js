@@ -5,6 +5,9 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
+import ReduxToastr from 'react-redux-toastr'
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
+
 
 import { basename } from 'config'
 import configureStore from 'store/configure'
@@ -15,9 +18,15 @@ const store = configureStore({}, { api: api.create() })
 
 const renderApp = () => (
   <Provider store={store}>
-    <BrowserRouter basename={basename}>
-      <App />
-    </BrowserRouter>
+    <div>
+      <BrowserRouter basename={basename}>
+        <App />
+      </BrowserRouter>
+      <ReduxToastr
+        transitionIn="fadeIn"
+        transitionOut="fadeOut"
+        progressBar />
+    </div>
   </Provider>
 )
 
