@@ -1,5 +1,6 @@
 import React from 'react'
 import { Field } from 'redux-form'
+import { Button, Input } from 'components'
 
 /**
  * redux-form (presentational components): `components/organisms`에 배치한다.
@@ -25,9 +26,9 @@ const LoginForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Field name="username" type="text" placeholder="Username" component="input" />
-      <Field name="password" type="password" placeholder="Password" component="input" />
-      <button type="submit">Sign In</button>
+      <Field name="username" type="text" placeholder="Username" component={Input} />
+      <Field name="password" type="password" placeholder="Password" component={Input} />
+      <Button type="submit">Sign In</Button>
     </form>
   )
 }
