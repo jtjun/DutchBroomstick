@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const StyledLi = styled.li`
@@ -27,7 +28,7 @@ const StyledLi = styled.li`
 
 const ListItem = props => (
   <StyledLi>
-    <p><strong>{props.title}</strong> <a>Link</a></p>
+    <p><strong>{props.title}</strong> <Link to={props.linkTo || "#"}>{props.linkName || "Link"}</Link></p>
     <p className="right">{props.description}</p>
   </StyledLi>
 )
@@ -35,6 +36,8 @@ const ListItem = props => (
 ListItem.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
+  linkTo: PropTypes.any,
+  linkName: PropTypes.string,
 }
 
 export default ListItem

@@ -16,7 +16,11 @@ const getNodeCenter = (angle, r) => {
 const Node = (props) => {
     let angle = getAngle(props.idx, props.nodeCount);
     let center = getNodeCenter(angle, props.r);
-    return <circle r={props.r} cx={center.x} cy={center.y} />
+    return (
+      <circle
+        r={props.r} cx={center.x} cy={center.y}
+        stroke="#bfbfbf" strokeWidth="0.5" fill="white" />
+    )
 }
 
 Node.propTypes = {
@@ -44,10 +48,9 @@ const Edge = (props) => {
       <line
         x1={nodeFrom.x} y1={nodeFrom.y}
         x2={nodeTo.x} y2={nodeTo.y}
-        stroke="red" />
+        stroke="#595959" strokeWidth="1" />
       <polygon points={points}
-        stroke="red"
-        fill="red" />
+        stroke="#595959" strokeWidth="1" fill="#595959" />
     </g>)
 }
 
@@ -59,21 +62,29 @@ Edge.propTypes = {
 }
 
 
-const CircularGraph = (props) => {
-    const nodeCount = 7;
-
+const CircularGraph = ({nodeCount, edges, width, height}) => {
     return (
       <svg
           xmlns="http://www.w3.org/2000/svg"
-          width={props.width}
-          height={props.height}
-          viewBox="0 0 100 100">
+          width={width} height={height}
+          viewBox="-1 -1 101 101">
         {[...Array(nodeCount).keys()].map(
             key => <Node key={key} idx={key} nodeCount={nodeCount} r={7} />
         )}
-        <Edge from={1} to={3} nodeCount={nodeCount} r={7} />
+        {edges.map(
+            ({from, to}, index) =>
+                <Edge key={index} from={from} to={to} nodeCount={nodeCount} r={7} />
+        )}
       </svg>
     )
+}
+
+CircularGraph.propTypes = {
+    nodeCount: PropTypes.number.isRequired,
+    edges: PropTypes.arrayOf(PropTypes.shape({
+        from: PropTypes.number.isRequired,
+        to: PropTypes.number.isRequired,
+    })),
 }
 
 export default CircularGraph
