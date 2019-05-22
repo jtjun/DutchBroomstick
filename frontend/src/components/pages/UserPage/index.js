@@ -2,21 +2,40 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+import { Block, Button, Header, List, ListItem } from 'components'
+
 /**
  * Presentational Components의 경우 redux 로직을 배제한다 (cf. pages/MainPage/index.js)
  */
 
 const UserPage = ({username, onClickUserInfo, onClickSignOut}) => (
   <div>
-    <h1>{username}</h1>
-      {/* // Room List를 만드는 로직은 미구현 (~Iteration 2)
+    <Header />
+    <Block transparent>
+      <h1>{username}</h1>
+      <Link to={`/user/${username}/setting`}>
+        <button onClick={onClickUserInfo}>유저 정보</button>
+      </Link>
+    </Block>
+    <Block>
+      새로운 방을 원한다면?
+      <Button>방 생성</Button>
+    </Block>
+    <Block>
+      <List>
+        <ListItem title="List 1" description="Desc 1" />
+        <ListItem title="List 2" description="Desc 2" />
+      </List>
+    {
+      /* // Room List를 만드는 로직은 미구현 (~Iteration 2)
         <button>방 생성</button>
         {rooms.map(r => <Room />)}
-      */}
-    <Link to={`/user/${username}/setting`}>
-      <button onClick={onClickUserInfo}>유저 정보</button>
-    </Link>
-    <button onClick={onClickSignOut}>로그아웃</button>
+      */
+    }
+    </Block>
+    <Block transparent>
+      <a onClick={onClickSignOut}>로그아웃</a>
+    </Block>
   </div>
 )
 

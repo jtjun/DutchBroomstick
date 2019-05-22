@@ -11,6 +11,7 @@ const Input = styled.input`
   margin: 0.5em auto 0;
   padding: 10px 15px;
   width: 100%;
+  max-width: 224px;
 `
 
 // for redux-form

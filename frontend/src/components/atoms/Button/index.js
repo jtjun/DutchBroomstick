@@ -10,8 +10,9 @@ const Button = styled.button`
   box-sizing: border-box;
   font-size: 1em;
   margin: 0.5em auto 0;
-  padding: 10px 15px;
+  padding: 4px 15px;
   width: 100%;
+  max-width: 224px;
 `
 
 export default Button

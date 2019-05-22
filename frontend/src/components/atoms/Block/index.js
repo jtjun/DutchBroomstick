@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 const Block = styled.div`
-  background-color: white;
-  border: thin solid #bfbfbf;
+  background-color: ${props => props.transparent ? "transparent" : "white"};
+  border: ${props => props.transparent ? "none" : "thin solid #bfbfbf"};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,6 +12,7 @@ const Block = styled.div`
   width: 100%;
   & a {
     color: #00b0f0;
+    cursor: pointer;
     text-decoration: none;
   }
 `
