@@ -23,8 +23,8 @@ const UserPage = ({username, onClickUserInfo, onClickSignOut}) => (
     </Block>
     <Block>
       <List>
-        <ListItem title="List 1" description="Desc 1" />
-        <ListItem title="List 2" description="Desc 2" />
+        <ListItem title="활빈당" description="3명" linkTo="/room/hwalbin" />
+        <ListItem title="홍가네" description="5명" linkTo="/room/hongfamily" />
       </List>
     {
       /* // Room List를 만드는 로직은 미구현 (~Iteration 2)
