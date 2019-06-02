@@ -13,13 +13,15 @@ const UserPage = ({username, onClickUserInfo, onClickSignOut}) => (
     <Header />
     <Block transparent>
       <h1>{username}</h1>
-      <Link to={`/user/${username}/setting`}>
+      <Link to="/user/setting/">
         <button onClick={onClickUserInfo}>유저 정보</button>
       </Link>
     </Block>
     <Block>
       새로운 방을 원한다면?
-      <Button>방 생성</Button>
+      <Link to="/user/create_room/">
+        <Button>방 생성</Button>
+      </Link>
     </Block>
     <Block>
       <List>

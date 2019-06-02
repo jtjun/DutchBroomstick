@@ -6,9 +6,9 @@ import { Redirect } from 'react-router-dom'
 const RoomCreatePageContainer = (props) => {
   const { roomname } = props
   
-  if( !roomname ){
+  if( roomname ){
     return(
-      <Redirect to="/"/>
+      <Redirect to={`/room/${roomname}/`}/>
     )
   } 
   else {
@@ -16,15 +16,6 @@ const RoomCreatePageContainer = (props) => {
       <RoomCreatePage {...props} />
     )
   }
-
-
-//for test
-/*
-  return (
-    <RoomCreatePage {...props} />
-  )
-*/
-
 }
 
 const mapStateToProps = () => ({

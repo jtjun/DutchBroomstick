@@ -20,7 +20,7 @@ const MainPageContainer = props => {
        * https://reacttraining.com/react-router/web/api/Redirect
        */
       return (
-        <Redirect to={`/user/${username}`} />
+        <Redirect to="/user/" />
       )
     } else {
       return (
