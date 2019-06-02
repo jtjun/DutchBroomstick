@@ -2,9 +2,10 @@ from django.contrib.auth.models import User
 from .models import Room, Member
 from rest_framework import generics
 from rest_framework import permissions
+from rest_framework.response import Response
 
 from .serializers import UserSerializer, RoomSerializer, MemberSerializer
-from .permissions import IsThemselves
+from .permissions import IsThemselves, CheckUsername
 
 
 class UserCreateView(generics.CreateAPIView):
@@ -20,8 +21,12 @@ class UserDetailView(generics.RetrieveAPIView):
 
 
 class RoomCreateView(generics.CreateAPIView):
+    permission_classes = (CheckUsername,)
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
+    
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class RoomDetailView(generics.RetrieveAPIView):

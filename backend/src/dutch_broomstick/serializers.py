@@ -28,8 +28,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class RoomSerializer(serializers.ModelSerializer):
-    roomname = serializers.CharField(source="roomname")
-    owner = serializers.ReadOnlyField(source="user.pk")
+    roomname = serializers.CharField()
+    owner = serializers.StringRelatedField()
 
     class Meta:
         model = Room
