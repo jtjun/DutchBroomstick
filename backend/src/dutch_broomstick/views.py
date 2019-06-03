@@ -1,11 +1,12 @@
 from django.contrib.auth.models import User
-from .permissions import IsThemselves
 from rest_framework import generics
 from rest_framework import permissions
+from rest_framework.response import Response
 
 from .models import Room, Member, Layer, Payment, Credit
 from .serializers import UserSerializer, RoomSerializer, MemberSerializer, \
                             LayerSerializer, PaymentSerializer, CreditSerializer
+from .permissions import IsThemselves, CheckUsername
 
 
 class UserCreateView(generics.CreateAPIView):
@@ -21,8 +22,12 @@ class UserDetailView(generics.RetrieveAPIView):
 
 
 class RoomCreateView(generics.CreateAPIView):
+    permission_classes = (CheckUsername,)
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
+    
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class RoomDetailView(generics.RetrieveAPIView):
@@ -50,7 +55,7 @@ class LayerCreateView(generics.CreateAPIView):
 class LayerDetailView(generics.RetrieveAPIView):
     queryset = Layer.objects.all()
     serializer_class = LayerSerializer
-    lookup_field = 'layername'
+    lookup_field = 'number'
 
 
 class PaymentCreateView(generics.CreateAPIView):

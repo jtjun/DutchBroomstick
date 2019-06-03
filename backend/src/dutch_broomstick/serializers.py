@@ -28,13 +28,13 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class RoomSerializer(serializers.ModelSerializer):
-    # url =
-    roomname = serializers.CharField(source="roomname")
-    owner = serializers.ReadOnlyField(source="user.id")
+    roomname = serializers.CharField()
+    owner = serializers.StringRelatedField()
+    url = serializers.ReadOnlyField()
 
     class Meta:
         model = Room
-        fields = ('id', 'url', 'roomname', 'owner')
+        fields = ('roomname', 'owner', 'url')
 
 
 class MemberSerializer(serializers.ModelSerializer):
