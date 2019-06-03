@@ -36,6 +36,6 @@ urlpatterns = [
     # credit urls
     path('users/<str:username>/rooms/<str:roomname>/layers/<str:number>/payments/<str:id>/credits',
          views.CreditCreateView.as_view()),
-    path('users/<str:username>/rooms/<str:roomname>/layers/<str:number>/payments/<str:id>/credits/<str:id>',
-         views.CreditDetailView.as_view()),
+    # path('users/<str:username>/rooms/<str:roomname>/layers/<str:number>/payments/<str:id>/credits/<str:id>',
+    #      views.CreditDetailView.as_view()),
 ]
