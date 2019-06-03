@@ -27,7 +27,7 @@ const App = () => {
         <Route path="/user/" component={UserPage} exact />
         <Route path="/user/setting/" component={UserInfoPage} exact  />
         <Route path="/user/create_room/" component={RoomCreatePage} exact  />
-        <Route path="/user/:room/entrance/" component={EntrancePage} />        
+        <Route path="/user/:room/entrance/" component={EntrancePage} />
       </Switch>
     </ThemeProvider>
   )

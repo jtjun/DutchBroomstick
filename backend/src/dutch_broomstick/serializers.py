@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Profile, Member, Room
+from .models import Profile, Room,  Member, Layer, Payment, Credit
 
 class UserSerializer(serializers.ModelSerializer):
     default_nickname = serializers.CharField(source='profile.default_nickname', required=False)
@@ -38,11 +38,41 @@ class RoomSerializer(serializers.ModelSerializer):
 
 
 class MemberSerializer(serializers.ModelSerializer):
-    name = serializers.CharField(source="name")
+    membername = serializers.CharField(source="membername")
     account = serializers.CharField(source="account")
-    room = serializers.ReadOnlyField(source="room.pk")
-    user = serializers.ReadOnlyField(source="user.pk")
+    room = serializers.ReadOnlyField(source="room.id")
+    user = serializers.ReadOnlyField(source="user.id")
 
     class Meta:
         model = Member
-        fields = ('name', 'account', 'room', 'user')
+        fields = ('id', 'membername', 'account', 'room', 'user')
+
+class LayerSerializer(serializers.ModelSerializer):
+    number = serializers.IntegerField(source="number")
+    layername = serializers.CharField(source="layename")
+    currency = serializers.CharField(source="currency")
+    room = serializers.ReadOnlyField(source="room.id")
+
+    class Meta:
+        model = Layer
+        fields = ('id', 'number', 'layername', 'currency', 'room')
+
+
+class PaymentSerializer(serializers.ModelSerializer):
+    layer = serializers.ReadOnlyField(source="layer.id")
+    forWhat = serializers.CharField(source="forWhat")
+    fromWho = serializers.ReadOnlyField(source="fromWho.id")
+
+    class Meta:
+        model = Payment
+        fields = ('id', 'timestamp', 'layer', 'forWhat', 'fromWho')
+
+
+class CreditSerializer(serializers.ModelSerializer):
+    amount = serializers.FloatField(source="amount")
+    payment = serializers.ReadOnlyField(source="fromWho.id")
+    toWho = serializers.ReadOnlyField(source="fromWho.id")
+
+    class Meta:
+        model = Credit
+        fields = ('id', 'amount', 'payment', 'towho')
