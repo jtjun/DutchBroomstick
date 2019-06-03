@@ -33,7 +33,7 @@ class RoomListCreateView(generics.ListCreateAPIView):
 class RoomDetailView(generics.RetrieveAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
-    lookup_field = 'roomname'
+    lookup_field = 'url'
 
 
 class MemberCreateView(generics.CreateAPIView):

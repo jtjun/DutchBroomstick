@@ -43,8 +43,24 @@ function* watchRoomListRequest() {
 }
 
 
+/* Room Get Request */
+function* getRequest({ url }) {
+  try {
+    const room = yield api.get(`/rooms/${url}/`)
+    yield put(actions.roomGetSuccess(room))
+  } catch(e) {
+    yield put(actions.roomGetFailed(e))
+  }
+}
+
+function* watchRoomGetRequest() {
+  yield takeEvery(actions.ROOM_GET_REQUEST, getRequest)
+}
+
+
 export default function* () {
   yield fork(watchCreatePageRequest)
   yield fork(watchRoomListRequest)
+  yield fork(watchRoomGetRequest)
 }
 

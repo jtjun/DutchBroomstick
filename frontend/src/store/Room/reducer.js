@@ -1,6 +1,7 @@
 import * as actions from './actions';
-  
+
 const initialState = {
+  /* room: 현재 접속해있는 방의 정보 */
   room: null,
   /* roomList: UserPage의 방 목록 (해당 User가 접근할 수 있는 방 목록)
    *   - 초기화 이전에는 null
@@ -33,6 +34,21 @@ const roomReducer = (state = initialState, action) => {
       return {
         ...state,
         roomList: [],  // null 대신 빈 배열을 넣어 다시 호출이 일어나지 않도록 했음
+      }
+    case actions.ROOM_GET_SUCCESS:
+      return {
+        ...state,
+        room: action.room,
+      }
+    case actions.ROOM_GET_FAILED:
+      return {
+        ...state,
+        room: null,
+      }
+    case actions.ROOM_LEAVE:
+      return {
+        ...state,
+        room: null,
       }
     default:
       return state
