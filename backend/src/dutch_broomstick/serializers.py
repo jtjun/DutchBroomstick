@@ -30,10 +30,11 @@ class UserSerializer(serializers.ModelSerializer):
 class RoomSerializer(serializers.ModelSerializer):
     roomname = serializers.CharField()
     owner = serializers.StringRelatedField()
+    url = serializers.ReadOnlyField()
 
     class Meta:
         model = Room
-        fields = ('roomname', 'owner')
+        fields = ('roomname', 'owner', 'url')
 
 
 class MemberSerializer(serializers.ModelSerializer):
