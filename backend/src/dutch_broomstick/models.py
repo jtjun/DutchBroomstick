@@ -27,6 +27,9 @@ class Room(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     # ForeignKey can handle OneToMany
 
+    def __str__(self):
+        return self.url
+
 
 class Member(models.Model):
     membername = models.CharField(max_length=30, blank=False)

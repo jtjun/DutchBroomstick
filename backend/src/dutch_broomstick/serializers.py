@@ -39,8 +39,8 @@ class RoomSerializer(serializers.ModelSerializer):
 
 class MemberSerializer(serializers.ModelSerializer):
     membername = serializers.CharField()
-    account = serializers.CharField()
-    room = serializers.ReadOnlyField(source="room.id")
+    account = serializers.CharField(allow_blank=True)
+    room = serializers.StringRelatedField()
     user = serializers.ReadOnlyField(source="user.id")
 
     class Meta:

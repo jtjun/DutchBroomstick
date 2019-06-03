@@ -15,8 +15,7 @@ urlpatterns = [
     path('rooms/<str:url>/', views.RoomDetailView.as_view()),
 
     # member urls
-    path('users/<str:username>/rooms/<str:roomname>/members/',
-         views.MemberCreateView.as_view()),
+    path('rooms/<str:url>/members/', views.MemberListCreateView.as_view()),
     path('users/<str:username>/rooms/<str:roomname>/members/<str:membername>',
          views.MemberDetailView.as_view()),
 
