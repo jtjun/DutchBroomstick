@@ -38,8 +38,8 @@ class RoomSerializer(serializers.ModelSerializer):
 
 
 class MemberSerializer(serializers.ModelSerializer):
-    membername = serializers.CharField(source="membername")
-    account = serializers.CharField(source="account")
+    membername = serializers.CharField()
+    account = serializers.CharField()
     room = serializers.ReadOnlyField(source="room.id")
     user = serializers.ReadOnlyField(source="user.id")
 
@@ -48,9 +48,9 @@ class MemberSerializer(serializers.ModelSerializer):
         fields = ('id', 'membername', 'account', 'room', 'user')
 
 class LayerSerializer(serializers.ModelSerializer):
-    number = serializers.IntegerField(source="number")
-    layername = serializers.CharField(source="layename")
-    currency = serializers.CharField(source="currency")
+    number = serializers.IntegerField()
+    layername = serializers.CharField()
+    currency = serializers.CharField()
     room = serializers.ReadOnlyField(source="room.id")
 
     class Meta:
@@ -59,9 +59,9 @@ class LayerSerializer(serializers.ModelSerializer):
 
 
 class PaymentSerializer(serializers.ModelSerializer):
-    total = serializers.FloatField(source="total")
+    total = serializers.FloatField()
     layer = serializers.ReadOnlyField(source="layer.id")
-    forWhat = serializers.CharField(source="forWhat")
+    forWhat = serializers.CharField()
     fromWho = serializers.ReadOnlyField(source="fromWho.id")
 
     class Meta:
@@ -70,7 +70,7 @@ class PaymentSerializer(serializers.ModelSerializer):
 
 
 class CreditSerializer(serializers.ModelSerializer):
-    amount = serializers.FloatField(source="amount")
+    amount = serializers.FloatField()
     payment = serializers.ReadOnlyField(source="fromWho.id")
     toWho = serializers.ReadOnlyField(source="fromWho.id")
 
