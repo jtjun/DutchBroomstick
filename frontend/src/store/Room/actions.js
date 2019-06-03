@@ -2,15 +2,17 @@
 export const ROOM_CREATE_REQUEST = "ROOM_CREATE_REQUEST"
 export const ROOM_CREATE_SUCCESS = "ROOM_CREATE_SUCCESS"
 
-export const roomCreateRequest = (roomname, users) => ({
+export const roomCreateRequest = (roomname, users, username, token) => ({
     type: ROOM_CREATE_REQUEST,
     roomname,
     users,
+    username,
+    token,
 })
 
-export const roomCreateSuccess = ( roomname ) => ({
+export const roomCreateSuccess = (room) => ({
     type: ROOM_CREATE_SUCCESS,
-    roomname,
+    room,
 })
 
 export const ENTRANCE_REQUEST = "ENTRANCE_REQUEST"

@@ -1,4 +1,5 @@
 import { fork, takeEvery, put } from 'redux-saga/effects'
+import { toastr } from 'react-redux-toastr'
 import api from 'services/api'
 
 /**
@@ -10,9 +11,17 @@ import * as actions from './actions'
 
 /* Room Create Request */
 
-function* roomCreateRequest({ roomname, users }){
-  yield api.post('/user/create_room/', { roomname, users })
-  yield put(actions.roomCreateSuccess(roomname))
+function* roomCreateRequest({ roomname, users, username, token }){
+  try {
+    const room = yield api.post(`/users/${username}/rooms/`, { roomname }, { token })
+    toastr.light(
+      `${room.roomname}`, '새로운 방이 만들어졌습니다!',
+      { icon: 'success', status: 'success', }
+    )
+    yield put(actions.roomCreateSuccess(room))
+  } catch(e) {
+    console.log(e)
+  }
 }
 function* watchCreatePageRequest() {
   yield takeEvery(actions.ROOM_CREATE_REQUEST, roomCreateRequest)

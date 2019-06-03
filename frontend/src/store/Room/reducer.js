@@ -13,13 +13,17 @@ const initialState = {
 const roomReducer = (state = initialState, action) => {
   switch(action.type) {
     case actions.ROOM_CREATE_REQUEST:
-      return{
-        state,
+      return {
+        ...state,
       }
     case actions.ROOM_CREATE_SUCCESS:
-      return{
+      return {
         ...state,
-        roomname: action.roomname,
+        roomname: action.room.roomname,
+        roomList: [
+          ...state.roomList,
+          action.room,
+        ],
       }
     case actions.ROOM_LIST_SUCCESS:
       return {

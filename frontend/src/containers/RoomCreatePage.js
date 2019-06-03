@@ -4,11 +4,11 @@ import { RoomCreatePage } from 'components'
 import { Redirect } from 'react-router-dom'
 
 const RoomCreatePageContainer = (props) => {
-  const { roomname } = props
+  const { room } = props
   
-  if( roomname ){
+  if( room ){
     return(
-      <Redirect to={`/room/${roomname}/`}/>
+      <Redirect to={`/room/${room.roomname}/`}/>
     )
   } 
   else {
@@ -18,8 +18,10 @@ const RoomCreatePageContainer = (props) => {
   }
 }
 
-const mapStateToProps = () => ({
-
+const mapStateToProps = state => ({
+  room: state.room.roomname,
+  username: state.user.username,
+  token: state.user.token,
 })
 
 export default connect(mapStateToProps)(RoomCreatePageContainer)
