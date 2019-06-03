@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4834ea7e-a8cd-45c5-a78e-b7a0bf3f568e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/dutch_broomstick/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/dutch_broomstick/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/dutch_broomstick/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/dutch_broomstick/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/dutch_broomstick/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/dutch_broomstick/urls.py" afterDir="false" />
-    </list>
+    <list default="true" id="4834ea7e-a8cd-45c5-a78e-b7a0bf3f568e" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
