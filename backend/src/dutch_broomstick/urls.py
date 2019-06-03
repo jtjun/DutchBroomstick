@@ -24,18 +24,18 @@ urlpatterns = [
     # layer urls
     path('users/<str:username>/rooms/<str:roomname>/layers',
          views.LayerCreateView.as_view()),
-    path('users/<str:username>/rooms/<str:roomname>/layers/<str:layername>',
+    path('users/<str:username>/rooms/<str:roomname>/layers/<str:number>',
          views.LayerDetailView.as_view()),
 
     # payment urls
-    path('users/<str:username>/rooms/<str:roomname>/layers/<str:layername>/payments',
+    path('users/<str:username>/rooms/<str:roomname>/layers/<str:number>/payments',
          views.PaymentCreateView.as_view()),
-    path('users/<str:username>/rooms/<str:roomname>/layers/<str:layername>/payments/<str:id>',
+    path('users/<str:username>/rooms/<str:roomname>/layers/<str:number>/payments/<str:id>',
          views.PaymentDetailView.as_view()),
 
     # credit urls
-    path('users/<str:username>/rooms/<str:roomname>/layers/<str:layername>/payments/<str:id>/credits',
+    path('users/<str:username>/rooms/<str:roomname>/layers/<str:number>/payments/<str:id>/credits',
          views.CreditCreateView.as_view()),
-    path('users/<str:username>/rooms/<str:roomname>/layers/<str:layername>/payments/<str:id>/credits/<str:id>',
+    path('users/<str:username>/rooms/<str:roomname>/layers/<str:number>/payments/<str:id>/credits/<str:id>',
          views.CreditDetailView.as_view()),
 ]

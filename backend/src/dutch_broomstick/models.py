@@ -21,7 +21,6 @@ def random_url(length=7):
 
 
 class Room(models.Model):
-    #url =
     roomname = models.CharField(max_length=30, blank=False) # Room's name
     # Room's owner is always registered user
     url = models.CharField(max_length=10, default=random_url, unique=True)
@@ -45,6 +44,8 @@ class Layer(models.Model):
 
 class Payment(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
+    # total money
+    total = models.FloatField()
     layer = models.ForeignKey(Layer, on_delete=models.CASCADE, null=False)
     # what paid for
     forWhat = models.CharField(max_length=30, blank=False)
@@ -53,6 +54,7 @@ class Payment(models.Model):
 
 
 class Credit(models.Model):
+    # amount of money
     amount = models.FloatField()
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE, null=False)
     # who send the money to payment.fromWho
