@@ -19,7 +19,7 @@ const RoomCreatePageContainer = (props) => {
 }
 
 const mapStateToProps = state => ({
-  room: state.room.roomname,
+  room: state.room.room,
   username: state.user.username,
   token: state.user.token,
 })

@@ -1,8 +1,7 @@
 import * as actions from './actions';
   
 const initialState = {
-  roomname: null,
-  
+  room: null,
   /* roomList: UserPage의 방 목록 (해당 User가 접근할 수 있는 방 목록)
    *   - 초기화 이전에는 null
    *   - 초기화 된 이후에는 {roomname, url, owner}의 List로 구성됨
@@ -19,7 +18,7 @@ const roomReducer = (state = initialState, action) => {
     case actions.ROOM_CREATE_SUCCESS:
       return {
         ...state,
-        roomname: action.room.roomname,
+        room: action.room,
         roomList: [
           ...state.roomList,
           action.room,
