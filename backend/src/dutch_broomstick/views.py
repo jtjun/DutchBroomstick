@@ -1,10 +1,11 @@
 from django.contrib.auth.models import User
-from .models import Room, Member
+from .permissions import IsThemselves
 from rest_framework import generics
 from rest_framework import permissions
 
-from .serializers import UserSerializer, RoomSerializer, MemberSerializer
-from .permissions import IsThemselves
+from .models import Room, Member, Layer, Payment, Credit
+from .serializers import UserSerializer, RoomSerializer, MemberSerializer, \
+                            LayerSerializer, PaymentSerializer, CreditSerializer
 
 
 class UserCreateView(generics.CreateAPIView):
@@ -38,4 +39,37 @@ class MemberCreateView(generics.CreateAPIView):
 class MemberDetailView(generics.RetrieveAPIView):
     queryset = Member.objects.all()
     serializer_class = MemberSerializer
-    lookup_field = 'name'
+    lookup_field = 'membername'
+
+
+class LayerCreateView(generics.CreateAPIView):
+    queryset = Layer.objects.all()
+    serializer_class = LayerSerializer
+
+
+class LayerDetailView(generics.RetrieveAPIView):
+    queryset = Layer.objects.all()
+    serializer_class = LayerSerializer
+    lookup_field = 'layername'
+
+
+class PaymentCreateView(generics.CreateAPIView):
+    queryset = Payment.objects.all()
+    serializer_class = PaymentSerializer
+
+
+class PaymentDetailView(generics.RetrieveAPIView):
+    queryset = Payment.objects.all()
+    serializer_class = PaymentSerializer
+    lookup_field = "id"
+
+
+class CreditCreateView(generics.CreateAPIView):
+    queryset = Credit.objects.all()
+    serializer_class = CreditSerializer
+
+
+class CreditDetailView(generics.RetrieveAPIView):
+    queryset = Credit.objects.all()
+    serializer_class = CreditSerializer
+    lookup_field = "id"
