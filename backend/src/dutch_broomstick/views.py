@@ -21,7 +21,7 @@ class UserDetailView(generics.RetrieveAPIView):
     lookup_field = 'username'
 
 
-class RoomCreateView(generics.CreateAPIView):
+class RoomListCreateView(generics.ListCreateAPIView):
     permission_classes = (CheckUsername,)
     queryset = Room.objects.all()
     serializer_class = RoomSerializer

@@ -11,7 +11,7 @@ urlpatterns = [
 
     # room urls
     path('users/<str:username>/rooms/',
-         views.RoomCreateView.as_view()),
+         views.RoomListCreateView.as_view()),
     path('users/<str:username>/rooms/<str:roomname>/',
          views.RoomDetailView.as_view()),
 
