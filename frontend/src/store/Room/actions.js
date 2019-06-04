@@ -18,3 +18,9 @@ export const ENTRANCE_REQUEST = "ENTRANCE_REQUEST"
 export const entranceRequest = () => ({
     type: ENTRANCE_REQUEST,
 })
+
+export const ROOM_SETTING_REQUEST = "ROOM_SETTING_REQUEST"
+
+export const roomSettingRequest = () => ({
+    type: ROOM_SETTING_REQUEST,
+})
