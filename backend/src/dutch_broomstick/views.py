@@ -1,6 +1,8 @@
+from django.http import Http404
 from django.contrib.auth.models import User
 from rest_framework import generics
 from rest_framework import permissions
+from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
 from .models import Room, Member, Layer, Payment, Credit
@@ -21,7 +23,7 @@ class UserDetailView(generics.RetrieveAPIView):
     lookup_field = 'username'
 
 
-class RoomCreateView(generics.CreateAPIView):
+class RoomListCreateView(generics.ListCreateAPIView):
     permission_classes = (CheckUsername,)
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
@@ -33,12 +35,40 @@ class RoomCreateView(generics.CreateAPIView):
 class RoomDetailView(generics.RetrieveAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
-    lookup_field = 'roomname'
+    lookup_field = 'url'
 
 
-class MemberCreateView(generics.CreateAPIView):
-    queryset = Member.objects.all()
+class MemberListCreateView(generics.ListCreateAPIView):
     serializer_class = MemberSerializer
+
+    def get_room(self):
+        try:
+            room_url = self.request.resolver_match.kwargs.get('url')
+            return Room.objects.get(url=room_url)
+        except Room.DoesNotExist:
+            raise Http404
+
+    def get_queryset(self):
+        return self.get_room().member_set
+    
+    def perform_create(self, serializer):
+        data = self.request.data
+        room = self.get_room()
+        
+        if room.member_set.filter(membername=data.get("membername")).exists():
+            raise ValidationError({ 'nickname': ["중복된 별명입니다."] })
+        
+        user = None
+        if 'user' in data.keys():
+            try:
+                user = User.objects.get(username=data['user'])
+            except User.DoesNotExist:
+                raise ValidationError({ 'user': ["등록되지 않은 사용자명입니다."] })
+            
+            if room.member_set.filter(user=user).exists():
+                raise ValidationError({ 'user': ["이미 해당 방에 속한 사용자입니다."] })
+
+        serializer.save(room=room, user=user)
 
 
 class MemberDetailView(generics.RetrieveAPIView):

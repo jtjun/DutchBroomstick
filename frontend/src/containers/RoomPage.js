@@ -1,8 +1,37 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { RoomPage } from 'components'
 
-const RoomPageContainer = props => {
-  return <RoomPage {...props} />
+import { roomGetRequest, roomLeave } from 'store/actions'
+
+class RoomPageContainer extends React.Component {
+  componentDidMount() {
+    const { match, room, onGetRoom } = this.props
+    if (!room) {
+      onGetRoom(match.params.room_id)
+    }
+  }
+
+  render() {
+    if (this.props.room) {
+      document.title = `${this.props.room.roomname} - Dutch Broomstick`
+    }
+
+    return <RoomPage {...this.props} />
+  }
+
+  componentWillUnmount() {
+    this.props.onLeave()
+  }
 }
 
-export default RoomPageContainer
+const mapStateToProps = state => ({
+  room: state.room.room,
+})
+
+const mapDispatchToProps = dispatch => ({
+  onGetRoom: (url) => dispatch(roomGetRequest(url)),
+  onLeave: () => dispatch(roomLeave())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(RoomPageContainer)

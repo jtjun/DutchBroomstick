@@ -7,7 +7,7 @@ const RoomCreatePage = (props) => {
   return (
       <div>
         <Block>
-          <RoomCreateForm />
+          <RoomCreateForm {...props} />
         </Block>  
       </div>
   )

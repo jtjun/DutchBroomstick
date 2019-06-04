@@ -11,13 +11,11 @@ urlpatterns = [
 
     # room urls
     path('users/<str:username>/rooms/',
-         views.RoomCreateView.as_view()),
-    path('users/<str:username>/rooms/<str:roomname>/',
-         views.RoomDetailView.as_view()),
+         views.RoomListCreateView.as_view()),
+    path('rooms/<str:url>/', views.RoomDetailView.as_view()),
 
     # member urls
-    path('users/<str:username>/rooms/<str:roomname>/members/',
-         views.MemberCreateView.as_view()),
+    path('rooms/<str:url>/members/', views.MemberListCreateView.as_view()),
     path('users/<str:username>/rooms/<str:roomname>/members/<str:membername>',
          views.MemberDetailView.as_view()),
 
@@ -36,6 +34,6 @@ urlpatterns = [
     # credit urls
     path('users/<str:username>/rooms/<str:roomname>/layers/<str:number>/payments/<str:id>/credits',
          views.CreditCreateView.as_view()),
-    path('users/<str:username>/rooms/<str:roomname>/layers/<str:number>/payments/<str:id>/credits/<str:id>',
-         views.CreditDetailView.as_view()),
+    # path('users/<str:username>/rooms/<str:roomname>/layers/<str:number>/payments/<str:id>/credits/<str:id>',
+    #      views.CreditDetailView.as_view()),
 ]

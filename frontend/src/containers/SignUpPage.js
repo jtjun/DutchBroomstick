@@ -6,10 +6,10 @@ import { SignUpPage } from 'components'
 
 
 const SignUpPageContainer = props => {
-  const { signedIn, username } = props
+  const { signedIn } = props
 
   if (signedIn) {
-    return <Redirect to={`/user/${username}`} />
+    return <Redirect to={`/user/`} />
   }
   return (
     <SignUpPage {...props} />
