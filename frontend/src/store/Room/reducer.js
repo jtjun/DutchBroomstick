@@ -22,7 +22,7 @@ import { ROOM_CREATE_SUCCESS, } from './actions';
         }
       case ROOM_SETTING_REQUEST:
         return{
-          initialState
+          ...initialState
         }
 
       default:

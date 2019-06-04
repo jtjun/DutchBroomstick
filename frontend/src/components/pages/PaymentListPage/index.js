@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Button, Header, List } from 'components'
 
 
-const PaymentListPage = ({ username, roomname, paymentlist }) => (
+const PaymentListPage = ({ username, roomname, paymentlist, roomurl }) => (
     <div>
         <Header />
         <Block transparent>
@@ -14,9 +14,9 @@ const PaymentListPage = ({ username, roomname, paymentlist }) => (
         <Block>
             <List>
                 {
-                    paymentlist & paymentlist.map(
+                    paymentlist && paymentlist.map(
                         ({ forWhat, fromWho, total }, idx) => (
-                            <Listitem key={idx} title={forWhat/fromWho} description={total} linkTo={'/room/${url}/payment_list'} />
+                            <Listitem key={idx} title={`${forWhat}${fromWho}`} description={total} linkTo={`/room/:${roomurl}/payment_list/${forWhat}`} />
                         )
                     )
                 }

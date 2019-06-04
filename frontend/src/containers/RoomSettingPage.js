@@ -21,7 +21,7 @@ const RoomSettingPageContainer = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    roomname : state.roomname,
+    roomname : state.room.room.roomname,
 })
 
 export default connect(mapStateToProps)(RoomSettingPageContainer)

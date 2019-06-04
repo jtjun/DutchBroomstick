@@ -28,8 +28,8 @@ const App = () => {
         <Route path="/user/create_room/" component={RoomCreatePage} />
         <Route path="/user/:room/entrance/" component={EntrancePage} />
         <Route path="/room/" component={RoomPage} />
-        <Route path="/user/:room/setting/" component={RoomSettingPage} />
-        <Route path="/user/:room/payment_list/" component={PaymentListPage} />
+        <Route path="/room/:room/setting/" component={RoomSettingPage} />
+        <Route path="/room/:room/payment_list/" component={PaymentListPage} />
       </Switch>
     </ThemeProvider>
   )

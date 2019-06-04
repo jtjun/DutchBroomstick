@@ -20,9 +20,10 @@ const PaymentListPageContainer = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    username : state.username,
-    roomname : state.roomname,
-    paymentlist : state.paymentlist
+    username : state.user.username,
+    roomname : state.room.room.roomname,
+    paymentlist : state.Payment.paymentlist,
+    roomurl : state.room.room.url
 })
 
 export default connect(mapStateToProps)(PaymentListPageContainer)
