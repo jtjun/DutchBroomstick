@@ -17,13 +17,18 @@ export const checkStatus = (response) => {
 export const parseJSON = response => response.json()
 
 export const parseSettings = ({
-  method = 'get', data, locale, ...otherSettings
+  method = 'get', data, locale, token, ...otherSettings
 } = {}) => {
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     'Accept-Language': locale,
   }
+
+  if (token) {
+    headers['Authorization'] = `Token ${token}`
+  }
+
   const settings = merge({
     body: data ? JSON.stringify(data) : undefined,
     method,

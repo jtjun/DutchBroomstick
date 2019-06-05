@@ -45,7 +45,7 @@ const RoomCreateForm = props => {
   return (
     <form onSubmit={handleSubmit}>
       <Field
-        name="roomName"
+        name="roomname"
         type="text"
         component={renderField}
         label="RoomName"

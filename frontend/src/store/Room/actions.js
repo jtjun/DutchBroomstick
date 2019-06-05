@@ -28,6 +28,7 @@ export const roomSettingRequest = () => ({
     type: ROOM_SETTING_REQUEST,
 })
 
+
 /* Get Room List by User */
 export const ROOM_LIST_REQUEST = "ROOM_LIST_REQUEST"
 export const ROOM_LIST_SUCCESS = "ROOM_LIST_SUCCESS"
@@ -72,4 +73,5 @@ export const roomGetFailed = (error) => ({
 
 
 export const ROOM_LEAVE = "ROOM_LEAVE"
+
 export const roomLeave = () => ({ type: ROOM_LEAVE })

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Profile, Member, Room
+from .models import Profile, Room,  Member, Layer, Payment, Credit
 
 class UserSerializer(serializers.ModelSerializer):
     default_nickname = serializers.CharField(source='profile.default_nickname', required=False)
@@ -28,20 +28,52 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class RoomSerializer(serializers.ModelSerializer):
-    roomname = serializers.CharField(source="roomname")
-    owner = serializers.ReadOnlyField(source="user.pk")
+    roomname = serializers.CharField()
+    owner = serializers.StringRelatedField()
+    url = serializers.ReadOnlyField()
 
     class Meta:
         model = Room
-        fields = ('roomname', 'owner')
+        fields = ('roomname', 'owner', 'url')
 
 
 class MemberSerializer(serializers.ModelSerializer):
-    name = serializers.CharField(source="name")
-    account = serializers.CharField(source="account")
-    room = serializers.ReadOnlyField(source="room.pk")
-    user = serializers.ReadOnlyField(source="user.pk")
+    membername = serializers.CharField()
+    account = serializers.CharField(allow_blank=True)
+    room = serializers.StringRelatedField()
+    user = serializers.ReadOnlyField(source="user.id")
 
     class Meta:
         model = Member
-        fields = ('name', 'account', 'room', 'user')
+        fields = ('id', 'membername', 'account', 'room', 'user')
+
+class LayerSerializer(serializers.ModelSerializer):
+    number = serializers.IntegerField()
+    layername = serializers.CharField()
+    currency = serializers.CharField()
+    room = serializers.ReadOnlyField(source="room.id")
+
+    class Meta:
+        model = Layer
+        fields = ('number', 'layername', 'currency', 'room')
+
+
+class PaymentSerializer(serializers.ModelSerializer):
+    total = serializers.FloatField()
+    layer = serializers.ReadOnlyField(source="layer.id")
+    forWhat = serializers.CharField()
+    fromWho = serializers.ReadOnlyField(source="fromWho.id")
+
+    class Meta:
+        model = Payment
+        fields = ('id', 'total', 'timestamp', 'layer', 'forWhat', 'fromWho')
+
+
+class CreditSerializer(serializers.ModelSerializer):
+    amount = serializers.FloatField()
+    payment = serializers.ReadOnlyField(source="fromWho.id")
+    toWho = serializers.ReadOnlyField(source="fromWho.id")
+
+    class Meta:
+        model = Credit
+        fields = ('id', 'amount', 'payment', 'towho')

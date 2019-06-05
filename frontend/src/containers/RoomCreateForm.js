@@ -12,7 +12,9 @@ const RoomCreateFormContainer = props => {
 
 export default reduxForm({
     form: 'RoomCreate',
-    onSubmit(values, dispatch) {
-        dispatch(roomCreateRequest(values.roomname, values.usernames))
+    onSubmit(values, dispatch, props) {
+        const { roomname, usernames } = values
+        const { username, token } = props  // username means ownername
+        dispatch(roomCreateRequest(roomname, usernames, username, token))
     }
 })(RoomCreateFormContainer)
