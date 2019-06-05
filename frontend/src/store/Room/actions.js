@@ -15,10 +15,17 @@ export const roomCreateSuccess = (room) => ({
   room,
 })
 
+/* Entrance , Setting neet to change*/
 export const ENTRANCE_REQUEST = "ENTRANCE_REQUEST"
 
 export const entranceRequest = () => ({
-  type: ENTRANCE_REQUEST,
+    type: ENTRANCE_REQUEST,
+})
+
+export const ROOM_SETTING_REQUEST = "ROOM_SETTING_REQUEST"
+
+export const roomSettingRequest = () => ({
+    type: ROOM_SETTING_REQUEST,
 })
 
 
@@ -66,4 +73,5 @@ export const roomGetFailed = (error) => ({
 
 
 export const ROOM_LEAVE = "ROOM_LEAVE"
+
 export const roomLeave = () => ({ type: ROOM_LEAVE })
