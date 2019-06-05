@@ -22,14 +22,14 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Switch>
         <Route path="/" component={MainPage} exact />
+        <Route path="/room/:room_id" component={RoomPage} />
         <Route path="/signup/" component={SignUpPage} exact />
-        <Route path="/user/:id/" component={UserPage} />
-        <Route path="/user/:id/setting/" component={UserInfoPage} />
-        <Route path="/user/create_room/" component={RoomCreatePage} />
-        <Route path="/user/:room/entrance/" component={EntrancePage} />
-        <Route path="/room/:id" component={RoomPage} />
-        <Route path="/room/:room/setting/" component={RoomSettingPage} />
-        <Route path="/room/:room/payment_list/" component={PaymentListPage} />
+        <Route path="/user/" component={UserPage} exact />
+        <Route path="/user/setting/" component={UserInfoPage} exact  />
+        <Route path="/user/create_room/" component={RoomCreatePage} exact  />
+        <Route path="/user/:room_id/entrance/" component={EntrancePage} />
+        <Route path="/room/:room_id/setting/" component={RoomSettingPage} />
+        <Route path="/room/:room_id/payment_list/" component={PaymentListPage} />
       </Switch>
     </ThemeProvider>
   )
