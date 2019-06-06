@@ -4,6 +4,20 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+
+class TokenAuth:
+    def __init__(self, client, token):
+        self.client = client
+        self.token = token
+
+    def __enter__(self):
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {self.token}")
+        return self.client
+    
+    def __exit__(self, type, value, traceback):
+        self.client.credentials()
+
+
 # Create your tests here.
 class UserTestCase(APITestCase):
     def create_user(self, username, password, *, default_nickname=None, default_account=None):
@@ -71,18 +85,15 @@ class UserTestCase(APITestCase):
         response = self.client.get(f"/api/users/{username}/")
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-        # invalid token
-        response = self.client.get(f"/api/users/{username}/", headers={'Authorization': "Token Invalid"})
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-
         # valid token
         response = self.get_token(**payload)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         token = json.loads(response.content).get('token')
         self.assertIsNotNone(token)
 
-        response = self.client.get(f"/api/users/{username}/", headers={'Authorization': f"Token {token}"})
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        with TokenAuth(self.client, token) as client:
+            response = self.client.get(f"/api/users/{username}/")
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         # another user's token
         response = self.create_user('test2', 'test!@#$')
@@ -93,5 +104,6 @@ class UserTestCase(APITestCase):
         another_token = json.loads(response.content).get('token')
         self.assertIsNotNone(another_token)
 
-        response = self.client.get(f"/api/users/{username}/", headers={'Authorization': f"Token {another_token}"})
-        self.assertEqual(response.status_code, status.HTTP_203_FORBIDDEN)
+        with TokenAuth(self.client, another_token) as client:
+            response = client.get(f"/api/users/{username}/")
+            self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

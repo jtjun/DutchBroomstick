@@ -1,7 +1,7 @@
 import random
 import string
 from django.contrib.auth.models import User
-from django.db import models
+from django.db import models, utils
 
 # Create your models here.
 class Profile(models.Model):
@@ -16,7 +16,8 @@ def random_url(length=7):
         url = "".join([random.choice(string.ascii_lowercase) for _ in range(length)])
         try:
             Room.objects.get(url=url)
-        except Room.DoesNotExist:
+        except (utils.OperationalError, Room.DoesNotExist):
+            # db.utils.OperationalError : no such column while migrating
             return url
 
 
