@@ -1,14 +1,20 @@
 import React from 'react'
 
-import { Block, Button, CircularGraph, List, ListItem, Header } from 'components'
+import { Block, Button, CircularGraph, Graph, List, ListItem, Header } from 'components'
 
 const RoomPage = props => (
   <div>
     <Header />
     <Block transparent>
-      <CircularGraph
-        nodeCount={3}
-        edges={[{from: 1, to: 2}, {from: 0, to: 2}]} />
+      <Graph graph={{
+        nodes: [
+          { id: "a", label: "A" },
+          { id: "b", label: "B" },
+        ],
+        edges: [
+          { from: "a", to: "b", label: "10,000" },
+        ],
+      }} />
     </Block>
     <Block>
       새로운 계산이 생겼다면?
