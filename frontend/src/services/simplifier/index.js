@@ -36,7 +36,7 @@ export const getSimplifiedGraph = debts => {
       debts[first], -debts[last]
     )
 
-    edges.push({ from: first, to: last, label: amount })
+    edges.push({ from: first, to: last, label: String(amount) })
 
     debts[first] -= amount
     if (debts[first] === 0)

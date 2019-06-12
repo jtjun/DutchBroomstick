@@ -90,8 +90,8 @@ describe('getSimplifiedGraph', () => {
         { id: 'c', label: 'c' },
       ],
       edges: [
-        { from: 'a', to: 'c', label: 100 },
-        { from: 'b', to: 'c', label: 100 },
+        { from: 'a', to: 'c', label: '100' },
+        { from: 'b', to: 'c', label: '100' },
       ]
     })
 
@@ -106,9 +106,9 @@ describe('getSimplifiedGraph', () => {
         { id: 'd', label: 'd' },
       ],
       edges: [
-        { from: 'b', to: 'd', label: 202 },
-        { from: 'c', to: 'a', label: 101 },
-        { from: 'c', to: 'e', label: 100 },
+        { from: 'b', to: 'd', label: '202' },
+        { from: 'c', to: 'a', label: '101' },
+        { from: 'c', to: 'e', label: '100' },
       ]
     })
   })

@@ -27,6 +27,7 @@ class RoomPageContainer extends React.Component {
 
 const mapStateToProps = state => ({
   room: state.room.room,
+  payments: state.room.payments,
 })
 
 const mapDispatchToProps = dispatch => ({
