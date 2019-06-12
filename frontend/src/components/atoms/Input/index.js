@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const Input = styled.input`
@@ -12,6 +13,7 @@ const Input = styled.input`
   padding: 10px 15px;
   width: 100%;
   max-width: 224px;
+  text-align: ${props => (props || "left")};
 `
 
 // for redux-form
@@ -22,6 +24,10 @@ const InputField = ({ input, ...props }) => {
       <Input value={value} onChange={(e) => onChange(e.target.value)} {...props} />
     </div>
   )
+}
+
+InputField.propTypes = {
+  textAlign: PropTypes.string,
 }
 
 export default InputField
