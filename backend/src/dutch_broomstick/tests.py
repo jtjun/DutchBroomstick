@@ -1,8 +1,12 @@
 import json
 
 from django.test import TestCase
+from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.test import APITestCase
+
+from dutch_broomstick.models import Room, Member, Layer, Payment, Credit
+from dutch_broomstick.serializers import PaymentSerializer
 
 
 class TokenAuth:
@@ -107,3 +111,36 @@ class UserTestCase(APITestCase):
         with TokenAuth(self.client, another_token) as client:
             response = client.get(f"/api/users/{username}/")
             self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+class SerializerTest(TestCase):
+    def test_payment_serializer(self):
+        owner = User.objects.create(username="test_user", password="password")
+        room = Room.objects.create(roomname="test room", owner=owner)
+        layer = Layer.objects.create(number=0, room=room)
+        
+        member_list = [
+            Member.objects.create(membername=name, room=room)
+            for name in ["A", "B", "C"]
+        ]
+
+        payment = Payment.objects.create(total=300.0, layer=layer, forWhat="test", fromWho=member_list[0])
+        credit_list = [
+            Credit.objects.create(amount=100.0, payment=payment, toWho=member)
+            for member in member_list
+        ]
+
+        serialized = PaymentSerializer(payment).data
+
+        self.assertTrue('id' in serialized.keys())
+        self.assertTrue('timestamp' in serialized.keys())
+        self.assertEqual(serialized.get('fromWho'), "A")
+        self.assertEqual(serialized.get('forWhat'), "test")
+        self.assertEqual(serialized.get('layer'), 0)
+        self.assertEqual(str(serialized.get('total')), str(payment.total))
+
+        for i, credit in enumerate(credit_list):
+            credit_dict = serialized['credits'][i]
+            self.assertEqual(credit_dict.get('toWho'), credit.toWho.membername)
+            self.assertEqual(str(credit_dict.get('amount')), str(credit.amount))
+

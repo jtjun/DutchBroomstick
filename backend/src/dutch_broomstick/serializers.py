@@ -58,22 +58,23 @@ class LayerSerializer(serializers.ModelSerializer):
         fields = ('number', 'layername', 'currency', 'room')
 
 
-class PaymentSerializer(serializers.ModelSerializer):
-    total = serializers.FloatField()
-    layer = serializers.ReadOnlyField(source="layer.id")
-    forWhat = serializers.CharField()
-    fromWho = serializers.ReadOnlyField(source="fromWho.id")
-
-    class Meta:
-        model = Payment
-        fields = ('id', 'total', 'timestamp', 'layer', 'forWhat', 'fromWho')
-
-
 class CreditSerializer(serializers.ModelSerializer):
     amount = serializers.FloatField()
     payment = serializers.ReadOnlyField(source="fromWho.id")
-    toWho = serializers.ReadOnlyField(source="fromWho.id")
+    toWho = serializers.StringRelatedField()
 
     class Meta:
         model = Credit
-        fields = ('id', 'amount', 'payment', 'towho')
+        fields = ('id', 'payment', 'amount', 'toWho')
+
+
+class PaymentSerializer(serializers.ModelSerializer):
+    total = serializers.FloatField()
+    layer = serializers.ReadOnlyField(source="layer.number")
+    forWhat = serializers.CharField()
+    fromWho = serializers.StringRelatedField()
+    credits = CreditSerializer(many=True, source="credit_set")
+
+    class Meta:
+        model = Payment
+        fields = ('id', 'total', 'timestamp', 'layer', 'forWhat', 'fromWho', 'credits')
