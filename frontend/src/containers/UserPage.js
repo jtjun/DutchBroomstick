@@ -3,11 +3,13 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import { UserPage } from 'components'
-import { userSignout, roomListRequest } from 'store/actions'
+import { userSignout, roomListRequest, roomLeave } from 'store/actions'
 
 class UserPageContainer extends React.Component {
   componentDidMount() {
-    const { username, token, roomList, onListRoom } = this.props
+    const { username, token, roomList, onListRoom, resetRoom } = this.props
+    
+    resetRoom()  // set state.room.room to null
     if (roomList === null && username && token) {
       onListRoom(username, token)
     }
@@ -38,6 +40,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onClickSignOut: () => dispatch(userSignout()),
   onListRoom: (username, token) => dispatch(roomListRequest(username, token)),
+  resetRoom: () => dispatch(roomLeave()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPageContainer)
