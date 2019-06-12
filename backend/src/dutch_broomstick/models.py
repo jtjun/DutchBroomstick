@@ -38,6 +38,9 @@ class Member(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, null=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True) # user is nullable
 
+    def __str__(self):
+        return self.membername
+
 
 class Layer(models.Model):
     number = models.IntegerField()
