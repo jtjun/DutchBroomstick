@@ -14,6 +14,13 @@ import * as actions from './actions'
 function* roomCreateRequest({ roomname, users, username, token }){
   try {
     const room = yield api.post(`/users/${username}/rooms/`, { roomname }, { token })
+    const createMember = data => api.post(`/rooms/${room.url}/members/`, data, { token })
+
+    yield createMember({ user: username, membername: username })  // make owner
+    for (user of users) {
+      yield createMember({ membername: user })
+    }
+
     toastr.light(
       `${room.roomname}`, '새로운 방이 만들어졌습니다!',
       { icon: 'success', status: 'success', }
