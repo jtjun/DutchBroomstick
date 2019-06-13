@@ -7,7 +7,7 @@ import { ListItem } from 'components'
 describe('MemberList', () => {
   it('renders empty list', () => {
     const wrapper = shallow(<MemberList members={[]} onCreateMember={() => {}} />)
-    expect(wrapper.exists(ListItem)).toBe(false)
+    expect(wrapper.last().exists(ListItem)).toBe(false)
   })
 
   it('renders membername correctly', () => {
@@ -16,7 +16,7 @@ describe('MemberList', () => {
 
     const wrapper = shallow(<MemberList members={members} onCreateMember={() => {}} />)
     expect(
-      wrapper.filter(ListItem).getElements()
+      wrapper.last().filter(ListItem).getElements()
         .map((elem, idx) => shallow(elem).html())
         .every(html => html.contains(membernames[idx]))
     ).toBe(true)
