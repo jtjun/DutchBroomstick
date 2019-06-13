@@ -7,7 +7,7 @@ import { Block, Button, Input, List, ListItem } from 'components'
 const RoomCreateForm = props => {
   const { username, handleSubmit, newMemberName } = props;
   const { pushMember, resetField } = props;
-  const fields = props.users || [];
+  const fields = props.members || [];
 
   const ListItemWrapper = onRemove => {
     return ({ input }) => (
@@ -87,7 +87,7 @@ const RoomCreateForm = props => {
           멤버 추가
         </Button>
       </Block>
-      <FieldArray name="users" component={renderMembers} />
+      <FieldArray name="members" component={renderMembers} />
     </form>
   );
 };
