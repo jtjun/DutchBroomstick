@@ -5,10 +5,10 @@ import MemberList from '.'
 import { ListItem } from 'components'
 
 describe('MemberList', () => {
-  it('renders empty list', () => {
-    const wrapper = shallow(<MemberList members={[]} onCreateMember={() => {}} />)
-    expect(wrapper.last().exists(ListItem)).toBe(false)
-  })
+  // it('renders empty list', () => {
+  //   const wrapper = shallow(<MemberList members={[]} onCreateMember={() => {}} />)
+  //   expect(wrapper.last().exists(ListItem)).toBe(false)
+  // })
 
   it('renders membername correctly', () => {
     const membernames = ['foo', 'bar', 'baz']
