@@ -22,7 +22,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Switch>
         <Route path="/" component={MainPage} exact />
-        <Route path="/room/:room_id" component={RoomPage} />
+        <Route path="/room/:room_id/" component={RoomPage} exact />
         <Route path="/signup/" component={SignUpPage} exact />
         <Route path="/user/" component={UserPage} exact />
         <Route path="/user/setting/" component={UserInfoPage} exact  />
