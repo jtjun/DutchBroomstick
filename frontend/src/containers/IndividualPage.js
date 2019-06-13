@@ -12,7 +12,7 @@ const IndividualPageContainer = (props) => {
   }
   else if( !props.nickname ){
     return(
-      <Redirect to={`/room/${props.roomname}`}/>
+      <Redirect to={`/room/${props.roomurl}`}/>
     )
   } 
   else {
@@ -25,10 +25,12 @@ const IndividualPageContainer = (props) => {
 
 const mapStateToProps = (state) => ({
     
-    nickname : state.room.membername,
+    nickname : state.room.member.membername,
     roomname : state.room.room.roomname,
-    //canchange
-    paymentlist : state.Payment.paymentlist,
+    
+    //need to change after make payment states
+    //IndividualPage need two lists, sendmoneylist & getmoneylist
+    paymentlist : state.payment.paymentlist,
     roomurl : state.room.room.url
 })
 

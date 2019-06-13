@@ -36,7 +36,7 @@ const IndividualPage = ({ sendmoneylist, getmoneylist }) => (
     </div>
 )
 
-IndividualPage.PropTypes = {
+IndividualPage.propTypes = {
 
 }
 
