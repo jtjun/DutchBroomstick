@@ -8,6 +8,7 @@ const initialState = {
    *   - 초기화 된 이후에는 {roomname, url, owner}의 List로 구성됨
    */
   roomList: null,    
+  membername: null,
 }
 
 const roomReducer = (state = initialState, action) => {

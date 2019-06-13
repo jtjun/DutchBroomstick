@@ -30,4 +30,4 @@ PaymentListPage.PropTypes = {
     username: PropTypes.string.isRequired,
 }
 
-export default RoomSettingForm
+export default PaymentListPage
