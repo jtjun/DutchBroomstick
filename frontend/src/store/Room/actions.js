@@ -2,10 +2,10 @@
 export const ROOM_CREATE_REQUEST = "ROOM_CREATE_REQUEST"
 export const ROOM_CREATE_SUCCESS = "ROOM_CREATE_SUCCESS"
 
-export const roomCreateRequest = (roomname, users, username, token) => ({
+export const roomCreateRequest = (roomname, members, username, token) => ({
   type: ROOM_CREATE_REQUEST,
   roomname,
-  users,
+  members,
   username,
   token,
 })
@@ -75,3 +75,11 @@ export const roomGetFailed = (error) => ({
 export const ROOM_LEAVE = "ROOM_LEAVE"
 
 export const roomLeave = () => ({ type: ROOM_LEAVE })
+
+
+export const ROOM_SET_MEMBER = "ROOM_SET_MEMBER"
+
+export const roomSetMember = member => ({
+  type: ROOM_SET_MEMBER,
+  member,
+})

@@ -17,12 +17,13 @@ const RoomCreateFormContainer = props => {
 const selector = formValueSelector(FORM_NAME)
 
 const mapStateToProps = state => ({
+  username: state.user.username,
   newMemberName: selector(state, 'newMemberName'),
-  users: selector(state, 'users'),
+  members: selector(state, 'members'),
 })
 
 const mapDispatchToProps = dispatch => ({
-  pushMember: value => dispatch(arrayPush(FORM_NAME, 'users', value)),
+  pushMember: value => dispatch(arrayPush(FORM_NAME, 'members', value)),
   resetField: field => dispatch(change(FORM_NAME, field, null)),
 })
 
@@ -30,9 +31,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(
   reduxForm({
     form: FORM_NAME,
     onSubmit(values, dispatch, props) {
-      const { roomname, usernames } = values
+      const { roomname, members } = values
       const { username, token } = props  // username means ownername
-      dispatch(roomCreateRequest(roomname, usernames, username, token))
+      dispatch(roomCreateRequest(roomname, members, username, token))
     }
   })(RoomCreateFormContainer)
 )
