@@ -17,6 +17,7 @@ const RoomCreateFormContainer = props => {
 const selector = formValueSelector(FORM_NAME)
 
 const mapStateToProps = state => ({
+  username: state.user.username,
   newMemberName: selector(state, 'newMemberName'),
   users: selector(state, 'users'),
 })
