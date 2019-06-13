@@ -28,6 +28,7 @@ const initialState = {
    *   - 초기화 이전에는 null
    *   - 초기화 된 이후에는 {roomname, url, owner}의 List로 구성됨
    */
+
   roomList: null,
 
   /* member: 사용자가 현재 보고 있는 IndividualPage의 주인
@@ -35,6 +36,7 @@ const initialState = {
    *   - Object({id, membername, account})
    */
   member: null,
+
 }
 
 const roomReducer = (state = initialState, action) => {
