@@ -2,10 +2,10 @@
 export const ROOM_CREATE_REQUEST = "ROOM_CREATE_REQUEST"
 export const ROOM_CREATE_SUCCESS = "ROOM_CREATE_SUCCESS"
 
-export const roomCreateRequest = (roomname, users, username, token) => ({
+export const roomCreateRequest = (roomname, members, username, token) => ({
   type: ROOM_CREATE_REQUEST,
   roomname,
-  users,
+  members,
   username,
   token,
 })

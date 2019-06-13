@@ -11,14 +11,14 @@ import * as actions from './actions'
 
 /* Room Create Request */
 
-function* roomCreateRequest({ roomname, users, username, token }){
+function* roomCreateRequest({ roomname, members, username, token }){
   try {
     const room = yield api.post(`/users/${username}/rooms/`, { roomname }, { token })
-    const createMember = data => api.post(`/rooms/${room.url}/members/`, data, { token })
+    const createMember = data => api.post(`/rooms/${room.url}/members/`, { account: "", ...data }, { token })
 
     yield createMember({ user: username, membername: username })  // make owner
-    for (user of users) {
-      yield createMember({ membername: user })
+    for (let member of members) {
+      yield createMember({ membername: member.name })
     }
 
     toastr.light(
