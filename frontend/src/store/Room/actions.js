@@ -75,3 +75,11 @@ export const roomGetFailed = (error) => ({
 export const ROOM_LEAVE = "ROOM_LEAVE"
 
 export const roomLeave = () => ({ type: ROOM_LEAVE })
+
+
+export const ROOM_SET_MEMBER = "ROOM_SET_MEMBER"
+
+export const roomSetMember = member => ({
+  type: ROOM_SET_MEMBER,
+  member,
+})

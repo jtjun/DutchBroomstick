@@ -45,6 +45,7 @@ const SquareGraph = props => {
               },
             },
           }}
+          events={props.events}
           />
       </Content>
     </Wrapper>
@@ -53,6 +54,7 @@ const SquareGraph = props => {
 
 SquareGraph.propTypes = {
   graph: PropTypes.object.isRequired,
+  events: PropTypes.object,
 }
 
 export default SquareGraph

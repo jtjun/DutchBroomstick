@@ -54,6 +54,7 @@ function* watchRoomListRequest() {
 function* getRequest({ url }) {
   try {
     const room = yield api.get(`/rooms/${url}/`)
+    room.members = yield api.get(`/rooms/${url}/members/`)
     yield put(actions.roomGetSuccess(room))
   } catch(e) {
     yield put(actions.roomGetFailed(e))
