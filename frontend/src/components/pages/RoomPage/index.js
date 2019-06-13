@@ -1,14 +1,15 @@
 import React from 'react'
 
-import { Block, Button, CircularGraph, List, ListItem, Header } from 'components'
+import { Block, Button, CircularGraph, Graph, List, ListItem, Header } from 'components'
+import { getMemberDebtList, getSimplifiedGraph } from 'services/simplifier'
 
 const RoomPage = props => (
   <div>
     <Header />
     <Block transparent>
-      <CircularGraph
-        nodeCount={3}
-        edges={[{from: 1, to: 2}, {from: 0, to: 2}]} />
+      <Graph graph={getSimplifiedGraph(
+        getMemberDebtList(props.payments)
+      )} />
     </Block>
     <Block>
       새로운 계산이 생겼다면?

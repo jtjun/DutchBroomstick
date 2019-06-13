@@ -1,14 +1,13 @@
 import React from 'react'
 import { RoomCreateForm } from 'containers'
-import { Block } from 'components'
+import { Header } from 'components'
 
 
 const RoomCreatePage = (props) => {
   return (
       <div>
-        <Block>
-          <RoomCreateForm {...props} />
-        </Block>  
+        <Header />
+        <RoomCreateForm {...props} />
       </div>
   )
 }

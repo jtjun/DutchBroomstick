@@ -28,14 +28,22 @@ const StyledLi = styled.li`
 
 const ListItem = props => (
   <StyledLi>
-    <p><strong>{props.title}</strong> <Link to={props.linkTo || "#"}>{props.linkName || "Link"}</Link></p>
+    <p>
+      <strong>{props.title}</strong>
+      {
+        (props.linkTo || props.linkName) &&
+        <Link to={props.linkTo || "#"}>
+          {props.linkName || "Link"}
+        </Link>
+      }
+    </p>
     <p className="right">{props.description}</p>
   </StyledLi>
 )
 
 ListItem.propTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string,
+  description: PropTypes.any,
   linkTo: PropTypes.any,
   linkName: PropTypes.string,
 }
