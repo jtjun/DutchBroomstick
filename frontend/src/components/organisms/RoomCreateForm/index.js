@@ -5,7 +5,7 @@ import { toastr } from 'react-redux-toastr'
 import { Block, Button, Input, List, ListItem } from 'components'
 
 const RoomCreateForm = props => {
-  const { handleSubmit, newMemberName } = props;
+  const { username, handleSubmit, newMemberName } = props;
   const { pushMember, resetField } = props;
   const fields = props.users || [];
 
@@ -23,6 +23,7 @@ const RoomCreateForm = props => {
       <Block>
         멤버 목록<br />
         <List>
+          <ListItem title={username} description="방장" />
           {fields.map((member, index) => (
             <Field
               key={index}
@@ -51,8 +52,9 @@ const RoomCreateForm = props => {
       return
     }
     
-    if (fields.filter(u => (u.name === newMemberName)).length) {
+    if (username === newMemberName || fields.filter(u => (u.name === newMemberName)).length) {
       showError("중복된 별명입니다.")
+      return
     }
 
     pushMember({ name: newMemberName, })
