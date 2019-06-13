@@ -11,7 +11,7 @@ export function* createRequest({ token, roomUrl, membername, account }) {
     )
     yield put(actions.memberCreateSuccess(member))
   } catch(e) {
-    yield put(actions.memberCreateFailed(e))
+    yield put(actions.memberCreateFailed(yield e.response.json()))
   }
 }
 
