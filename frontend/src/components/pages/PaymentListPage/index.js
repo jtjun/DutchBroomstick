@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Button, Header, List } from 'components'
+import { Button, Header, List, Block } from 'components'
 
 
 const PaymentListPage = ({ username, roomname, paymentlist, roomurl }) => (
