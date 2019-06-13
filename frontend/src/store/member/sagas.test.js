@@ -33,9 +33,13 @@ describe('createRequest', () => {
   })
 
   it('calls failed', () => {
-    const error = 'test'
-    expect(generator.throw(error).value).toEqual(
-      put(actions.memberCreateFailed(error))
+    const json = { name: 'test' }
+    const error = {
+      response: { json: () => {} }
+    }
+    generator.throw(error)
+    expect(generator.next(json).value).toEqual(
+      put(actions.memberCreateFailed(json))
     )
   })
 })

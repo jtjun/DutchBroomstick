@@ -6,7 +6,7 @@ import { ListItem } from 'components'
 
 describe('MemberList', () => {
   it('renders empty list', () => {
-    const wrapper = shallow(<MemberList members={[]} />)
+    const wrapper = shallow(<MemberList members={[]} onCreateMember={() => {}} />)
     expect(wrapper.exists(ListItem)).toBe(false)
   })
 
@@ -14,7 +14,7 @@ describe('MemberList', () => {
     const membernames = ['foo', 'bar', 'baz']
     const members = membernames.map((membername, id) => ({id, membername}))
 
-    const wrapper = shallow(<MemberList members={members} />)
+    const wrapper = shallow(<MemberList members={members} onCreateMember={() => {}} />)
     expect(
       wrapper.filter(ListItem).getElements()
         .map((elem, idx) => shallow(elem).html())
