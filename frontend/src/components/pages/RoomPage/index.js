@@ -5,19 +5,19 @@ import { Block, Button, CircularGraph, Graph, List, ListItem, Header } from 'com
 import { getMemberDebtList, getSimplifiedGraph } from 'services/simplifier'
 
 const RoomPage = props => {
-  const { room, onClickMember } = props
+  const { room, members, onClickMember } = props
   if (!room) return <Block transparent>Loading...</Block>
   
   // const graph = getSimplifiedGraph(getMemberDebtList(props.payments))
   const graph = {
-    nodes: room.members.map(m => ({ id: m.membername, label: m.membername })),
+    nodes: (members || []).map(m => ({ id: m.membername, label: m.membername })),
     edges: [],
   }
 
   const events = {
     selectNode(evt) {
       const nodeId = evt.nodes.find(() => true)
-      onClickMember(room.members.find(m => m.membername === nodeId))
+      onClickMember(members.find(m => m.membername === nodeId))
     }
   }
 
