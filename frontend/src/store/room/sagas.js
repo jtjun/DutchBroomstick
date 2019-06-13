@@ -11,9 +11,16 @@ import * as actions from './actions'
 
 /* Room Create Request */
 
-function* roomCreateRequest({ roomname, users, username, token }){
+function* roomCreateRequest({ roomname, members, username, token }){
   try {
     const room = yield api.post(`/users/${username}/rooms/`, { roomname }, { token })
+    const createMember = data => api.post(`/rooms/${room.url}/members/`, { account: "", ...data }, { token })
+
+    yield createMember({ user: username, membername: username })  // make owner
+    for (let member of members) {
+      yield createMember({ membername: member.name })
+    }
+
     toastr.light(
       `${room.roomname}`, '새로운 방이 만들어졌습니다!',
       { icon: 'success', status: 'success', }
@@ -47,6 +54,7 @@ function* watchRoomListRequest() {
 function* getRequest({ url }) {
   try {
     const room = yield api.get(`/rooms/${url}/`)
+    room.members = yield api.get(`/rooms/${url}/members/`)
     yield put(actions.roomGetSuccess(room))
   } catch(e) {
     yield put(actions.roomGetFailed(e))
