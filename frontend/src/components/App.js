@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { injectGlobal, ThemeProvider } from 'styled-components'
-import { MainPage, UserPage, UserInfoPage, SignUpPage, RoomCreatePage, EntrancePage, RoomPage, RoomSettingPage, PaymentListPage } from 'containers'
+import { MainPage, UserPage, UserInfoPage, SignUpPage, RoomCreatePage, EntrancePage, RoomPage, RoomSettingPage, PaymentListPage, IndividualPage } from 'containers'
 
 // https://github.com/diegohaz/arc/wiki/Styling
 import theme from './themes/default'
