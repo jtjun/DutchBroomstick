@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Button, Header, List, Block } from 'components'
 
-const IndividualPage = ({ sendmoneylist, getmoneylist }) => (
+const IndividualPage = ({ sendmoneylist, getmoneylist, roomurl, nickname }) => (
     <div>
         <Header />
 
@@ -12,8 +12,8 @@ const IndividualPage = ({ sendmoneylist, getmoneylist }) => (
             <List>
                 {
                     sendmoneylist && sendmoneylist.map(
-                        ({ member, howmuch }, idx) => (
-                            <Listitem key={idx} title={member} description={howmuch} linkTo={`ACCOUNTPAGE_NEED_TO_CHANGE`} />
+                        ({ to, label }, idx) => (
+                            <Listitem key={idx} title={to} description={label} linkTo={`/room/${roomurl}/member/${nickname}/${to}`} />
                         )
                     )
                 }
@@ -25,8 +25,8 @@ const IndividualPage = ({ sendmoneylist, getmoneylist }) => (
             <List>
                 {
                     getmoneylist && getmoneylist.map(
-                        ({ member, howmuch }, idx) => (
-                            <Listitem key={idx} title={member} description={howmuch} linkTo={`NULL_NEED_TO_CHANGE`} />
+                        ({ to, label }, idx) => (
+                            <Listitem key={idx} title={to} description={label} linkTo={`NULL_NEED_TO_CHANGE`} />
                         )
                     )
                 }

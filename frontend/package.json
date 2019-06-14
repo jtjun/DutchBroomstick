@@ -92,6 +92,7 @@
     "prop-types": "^15.5.8",
     "query-string": "^5.0.0",
     "react": "^16.0.0",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.0.0",
     "react-graph-vis": "^1.0.2",
     "react-hot-loader": "^3.1.1",
