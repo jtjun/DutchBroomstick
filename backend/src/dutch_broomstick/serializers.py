@@ -80,7 +80,7 @@ class PaymentSerializer(serializers.ModelSerializer):
     layer = serializers.ReadOnlyField(source="layer.number")
     forWhat = serializers.CharField()
     fromWho = serializers.StringRelatedField()
-    credits = CreditSerializer(many=True, source="credit_set")
+    credits = CreditSerializer(many=True, source="credit_set", read_only=True)
 
     class Meta:
         model = Payment

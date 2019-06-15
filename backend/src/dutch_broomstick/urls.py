@@ -26,9 +26,9 @@ urlpatterns = [
          views.LayerDetailView.as_view()),
 
     # payment urls
-    path('users/<str:username>/rooms/<str:roomname>/layers/<str:number>/payments',
+    path('rooms/<str:url>/layers/<int:number>/payments',
          views.PaymentCreateView.as_view()),
-    path('users/<str:username>/rooms/<str:roomname>/layers/<str:number>/payments/<str:id>',
+    path('rooms/<str:url>/layers/<int:number>/payments/<str:id>',
          views.PaymentDetailView.as_view()),
 
     # credit urls
