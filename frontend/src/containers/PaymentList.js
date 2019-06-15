@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { PaymentListPage } from 'components'
+import { PaymentList } from 'components'
 import { Redirect } from 'react-router-dom'
 
-const PaymentListPageContainer = (props) => {
+const PaymentListContainer = (props) => {
   
   
   if( !props.roomname ){
@@ -13,7 +13,7 @@ const PaymentListPageContainer = (props) => {
   } 
   else {
     return (
-      <PaymentListPage {...props} />
+      <PaymentList {...props} />
     )
   }
 
@@ -22,8 +22,8 @@ const PaymentListPageContainer = (props) => {
 const mapStateToProps = (state) => ({
     username : state.user.username,
     roomname : state.room.room.roomname,
-    paymentlist : state.Payment.paymentlist,
-    roomurl : state.room.room.url
+    paymentlist : state.payment.paymentlist,
+    roomurl : state.room.room.url,
 })
 
-export default connect(mapStateToProps)(PaymentListPageContainer)
+export default connect(mapStateToProps)(PaymentListContainer)
