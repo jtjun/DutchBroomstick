@@ -111,6 +111,28 @@ class UserTestCase(APITestCase):
         with TokenAuth(self.client, another_token) as client:
             response = client.get(f"/api/users/{username}/")
             self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+    
+    def test_create_room(self):
+        self.create_user('test', 'test!@#$')
+        user = User.objects.get(username='test')
+
+        self.client.force_authenticate(user=user)
+
+        # Room 생성 요청
+        response = self.client.post(
+            f"/api/users/{user.username}/rooms/",
+            { 'roomname': "test room" }, format='json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        # Layer도 같이 생성되는가?
+        room = Room.objects.get(url=json.loads(response.content).get('url'))
+        layers = Layer.objects.filter(room=room)
+        
+        self.assertEqual(layers.count(), 1)  # Layer가 1개만 생성되는가?
+        self.assertEqual(layers.first().number, 0)  # 해당 Layer는 0번인가?
+
+        self.client.force_authenticate(user=None)
 
 
 class SerializerTest(TestCase):

@@ -35,6 +35,13 @@ class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
         fields = ('roomname', 'owner', 'url')
+    
+    def create(self, validated_data):
+        room = Room(**validated_data)
+        room.save()
+
+        Layer.objects.create(number=0, room=room)
+        return room
 
 
 class MemberSerializer(serializers.ModelSerializer):
