@@ -37,6 +37,7 @@ const initialState = {
    */
   member: null,
 
+  showPayment: false,  // <PaymentList /> Vs. <MemberList />
 }
 
 const roomReducer = (state = initialState, action) => {
@@ -79,11 +80,17 @@ const roomReducer = (state = initialState, action) => {
         ...state,
         room: null,
         member: null,
+        showPayment: false,
       }
     case actions.ROOM_SET_MEMBER:
       return {
         ...state,
         member: action.member,
+      }
+    case actions.ROOM_TOGGLE_CONTENTS:
+      return {
+        ...state,
+        showPayment: !state.showPayment,
       }
     default:
       return state

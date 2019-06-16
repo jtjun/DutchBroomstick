@@ -38,15 +38,17 @@ class RoomDetailView(generics.RetrieveAPIView):
     lookup_field = 'url'
 
 
-class MemberListCreateView(generics.ListCreateAPIView):
-    serializer_class = MemberSerializer
-
+class RoomMixin:
     def get_room(self):
         try:
             room_url = self.request.resolver_match.kwargs.get('url')
             return Room.objects.get(url=room_url)
         except Room.DoesNotExist:
             raise Http404
+
+
+class MemberListCreateView(RoomMixin, generics.ListCreateAPIView):
+    serializer_class = MemberSerializer
 
     def get_queryset(self):
         return self.get_room().member_set
@@ -88,9 +90,35 @@ class LayerDetailView(generics.RetrieveAPIView):
     lookup_field = 'number'
 
 
-class PaymentCreateView(generics.CreateAPIView):
+class PaymentCreateView(RoomMixin, generics.CreateAPIView):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
+
+    def get_member(self, membername, room=None):
+        if room is None:
+            room = self.get_room()
+        
+        try:
+            return Member.objects.get(room=room, membername=membername)
+        except Member.DoesNotExist:
+            raise Http404
+
+    def perform_create(self, serializer):
+        kwargs = self.request.resolver_match.kwargs
+        data = self.request.data
+
+        room = self.get_room()
+        layer = room.layer_set.get(number=kwargs['number'])
+
+        fromWho = self.get_member(data['fromWho'], room=room)
+        payment = serializer.save(layer=layer, fromWho=fromWho)
+        
+        for credit in data['credits']:
+            Credit.objects.create(
+                payment=payment,
+                toWho=self.get_member(credit['toWho'], room=room),
+                amount=credit['amount']
+            )
 
 
 class PaymentDetailView(generics.RetrieveAPIView):

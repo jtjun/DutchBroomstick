@@ -2,23 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Block, Button, Graph, List, ListItem, Header } from 'components'
-import { MemberList } from 'containers'
+import { MemberList, PaymentList } from 'containers'
 import { getMemberDebtList, getSimplifiedGraph } from 'services/simplifier'
 
-const PaymentList = (
-  <Block>
-    <p>계산 내역</p>
-    <List>
-      <ListItem title="삼겹살" description="35,000원" />
-      <ListItem title="노래방" description="25,000원" />
-      <ListItem title="카페" description="30,000원" />
-    </List>
-    {/* 계산 내역 리스트 */}
-  </Block>
-)
-
 const RoomPage = props => {
-  const { room, members, onClickMember } = props
+  const { room, members, showPayment, onClickMember, onToggle } = props
   if (!room) return <Block transparent>Loading...</Block>
   
   // const graph = getSimplifiedGraph(getMemberDebtList(props.payments))
@@ -40,11 +28,13 @@ const RoomPage = props => {
       <Block transparent>
         <Graph graph={graph} events={events} />
       </Block>
-      <Block>
-        새로운 계산이 생겼다면?
-        <Button>내역 추가</Button>
-      </Block>
-      {members && <MemberList />}
+      <Button onClick={onToggle}>
+        {showPayment ? "멤버 목록 보기" : "결제 목록 보기"}
+      </Button>
+      {showPayment ?
+        (<PaymentList />) :
+        (members && <MemberList />)
+      }
       <Block transparent>
         <a>로그아웃</a>
       </Block>
@@ -54,6 +44,8 @@ const RoomPage = props => {
 
 RoomPage.propTypes = {
   onClickMember: PropTypes.func.isRequired,
+  showPayment: PropTypes.bool.isRequired,
+  onToggle: PropTypes.func.isRequired,
 }
 
 export default RoomPage

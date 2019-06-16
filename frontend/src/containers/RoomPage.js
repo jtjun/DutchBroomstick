@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { RoomPage } from 'components'
 
-import { roomGetRequest, roomLeave, roomSetMember } from 'store/actions'
+import { roomGetRequest, roomLeave, roomSetMember, roomToggleContents } from 'store/actions'
 
 class RoomPageContainer extends React.Component {
   componentDidMount() {
@@ -37,12 +37,14 @@ const mapStateToProps = state => ({
   member: state.room.member,
   members: state.member.members,
   payments: state.room.payments,
+  showPayment: state.room.showPayment,
 })
 
 const mapDispatchToProps = dispatch => ({
   onGetRoom: (url) => dispatch(roomGetRequest(url)),
   onLeave: () => dispatch(roomLeave()),
   onClickMember: member => dispatch(roomSetMember(member)),
+  onToggle: () => dispatch(roomToggleContents()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoomPageContainer)
