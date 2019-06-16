@@ -1,4 +1,6 @@
+import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const Button = styled.button`
   background: #00a5fa;
@@ -9,10 +11,23 @@ const Button = styled.button`
   display: block;
   box-sizing: border-box;
   font-size: 1em;
-  margin: 0.5em auto 0;
+  margin: ${({ horizontal }) => horizontal ? "0 0.5em" : "0.5em auto 0"};
   padding: 4px 15px;
   width: 100%;
   max-width: 224px;
 `
 
-export default Button
+const LightButton = styled(Button)`
+  background: white;
+  color: black;
+`
+
+const ButtonSwitch = ({ light, ...props }) => {
+  return light ? <LightButton {...props} /> : <Button {...props} />
+}
+
+ButtonSwitch.propTypes = {
+  light: PropTypes.bool,
+}
+
+export default ButtonSwitch
