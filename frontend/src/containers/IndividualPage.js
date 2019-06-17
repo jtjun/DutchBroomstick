@@ -28,9 +28,8 @@ const mapStateToProps = (state) => ({
     nickname : state.room.member.membername,
     roomname : state.room.room.roomname,
     
-    //need to change after make payment states
-    //IndividualPage need two lists, sendmoneylist & getmoneylist
-    paymentlist : state.payment.paymentlist,
+    sendlist : state.payment.sendlist,
+    getlist : state.payment.getlist,
     roomurl : state.room.room.url
 })
 
