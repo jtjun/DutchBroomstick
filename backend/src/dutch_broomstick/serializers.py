@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Profile, Room,  Member, Layer, Payment, Credit
+from .models import Profile, Room, Member, Layer, Payment, Credit
+
 
 class UserSerializer(serializers.ModelSerializer):
     default_nickname = serializers.CharField(source='profile.default_nickname', required=False)
@@ -26,6 +27,25 @@ class UserSerializer(serializers.ModelSerializer):
         Profile.objects.create(user=user, **profile_data)
         return user
 
+    def update(self, instance, validated_data):
+        print("print")
+        print(validated_data)
+        try:
+            profile_data = validated_data.pop('profile')
+        except KeyError:
+            profile_data = {}
+
+        try:
+            password = validated_data.pop('password')
+            instance.set_password(password)
+        except KeyError:
+            pass
+
+        instance.save()
+
+        Profile.objects.update_or_create(user=instance, **profile_data)
+        return instance
+
 
 class RoomSerializer(serializers.ModelSerializer):
     roomname = serializers.CharField()
@@ -35,7 +55,7 @@ class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
         fields = ('roomname', 'owner', 'url')
-    
+
     def create(self, validated_data):
         room = Room(**validated_data)
         room.save()
@@ -53,6 +73,7 @@ class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
         fields = ('id', 'membername', 'account', 'room', 'user')
+
 
 class LayerSerializer(serializers.ModelSerializer):
     number = serializers.IntegerField()
