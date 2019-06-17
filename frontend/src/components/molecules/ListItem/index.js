@@ -3,42 +3,37 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-const StyledLi = styled.li`
-  border: thin solid #bfbfbf;
-  border-radius: 0.25em;
-  box-sizing: border-box;
-  margin-bottom: 0.5em;
-  padding: 10px 20px;
-  list-style: none;
-  width: 100%;
-  & > p {
-    margin: 0;
-  }
-  & strong {
-    margin-right: 0.5em;
-    color: #404040;
-    font-size: 1.1em;
-  }
-  & .right {
-    text-align: right;
-    color: #797979;
-    font-size: 0.75em;
-  }
+import { TwoLineBlock } from 'components'
+
+const StyledP = styled.p`
+  margin: 0;
+  font-size: ${({fontSize}) => fontSize};
 `
 
-const ListItem = props => (
-  <StyledLi>
-    <p>
-      <strong>{props.title}</strong>
-      {
-        (props.linkTo || props.linkName) &&
-        <Link to={props.linkTo || "#"}>
-          {props.linkName || "Link"}
-        </Link>
-      }
-    </p>
-    <p className="right">{props.description}</p>
-  </StyledLi>
+StyledP.defaultProps = {
+  fontSize: '1em',
+}
+
+const Label = styled.strong`
+  margin-right: 0.5em;
+  font-size: 1.1em;
+`
+
+const ListItem = ({ title, linkTo, linkName, description}) => (
+  <TwoLineBlock
+    upper={
+      <StyledP>
+        <Label>{title}</Label>
+        {
+          (linkTo || linkName) &&
+          <Link to={linkTo || "#"}>
+            {linkName || "Link"}
+          </Link>
+        }
+      </StyledP>
+    }
+    lower={<StyledP fontSize="0.75em">{description}</StyledP>}
+  />
 )
 
 ListItem.propTypes = {
