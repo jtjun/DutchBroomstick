@@ -64,13 +64,23 @@ export const userSignUpFailed = error => ({
 
 /*User Info Change Action */
 export const USER_INFO_CHANGE_REQUEST = "USER_INFO_CHANGE_REQUEST"
+export const USER_INFO_CHANGE_SUCCESS = "USER_INFO_CHANGE_SUCCESS"
 export const USER_INFO_CHANGE_FAILED = "USER_INFO_CHANGE_FAILED"
 
-export const userInfoChangeRequest = (username, password, passwordRepeat) => ({
+export const userInfoChangeRequest = ( password, default_nickname, default_account, username, token) => ({
     type: USER_INFO_CHANGE_REQUEST,
-    username,
     password,
-    passwordRepeat,
+    default_nickname,
+    default_account,
+    username,
+    token,
+})
+
+export const userInfoChangeSuccess = (password, name, account) => ({
+  type: USER_INFO_CHANGE_SUCCESS,
+  password, 
+  name, 
+  account
 })
 
 export const userInfoChangeFailed = error => ({

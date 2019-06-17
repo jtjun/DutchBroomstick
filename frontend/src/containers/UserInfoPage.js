@@ -7,8 +7,7 @@ const UserInfoPageContainer = (props) => {
   return <UserInfoPage {...props} />
 }
 
-const mapStateToProps = () => ({
-
+const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps)(UserInfoPageContainer)
