@@ -55,6 +55,21 @@ const roomReducer = (state = initialState, action) => {
           action.room,
         ],
       }
+      
+    /*
+    case actions.ROOM_SETTING_REQUEST:
+      return{
+        ...initialState,
+      }
+    case action.ROOM_DELETE_SUCCESS:
+      return{
+        ...initialState,
+      }
+    case action.ROOM_DELETE_FAILED:
+      return{
+        ...initialState,
+      }
+    */
     case actions.ROOM_LIST_SUCCESS:
       return {
         ...state,

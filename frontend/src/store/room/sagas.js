@@ -67,9 +67,26 @@ function* watchRoomGetRequest() {
 }
 
 
+/* Room Delete Request */
+function* deleteRequest( { url } ) {
+
+  try {
+    const room = yield api.delete(`/rooms/${url}/`)
+    yield put(actions.roomDeleteSuccess())
+  } catch(e) {
+    yield put(actions.roomDeleteFailed(e))
+  }
+
+}
+
+function* watchRoomSettingRequest() {
+  yield takeEvery(actions.ROOM_SETTING_REQUEST, deleteRequest)
+}
+
 export default function* () {
   yield fork(watchCreatePageRequest)
   yield fork(watchRoomListRequest)
   yield fork(watchRoomGetRequest)
+  yield fork(watchRoomSettingRequest)
 }
 

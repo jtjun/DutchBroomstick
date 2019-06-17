@@ -23,9 +23,19 @@ export const entranceRequest = () => ({
 })
 
 export const ROOM_SETTING_REQUEST = "ROOM_SETTING_REQUEST"
+export const ROOM_DELETE_SUCCESS = "ROOM_DELETE_SUCCESS"
+export const ROOM_DELETE_FAILED = "ROOM_DELETE_FAILED"
 
-export const roomSettingRequest = () => ({
+
+export const roomSettingRequest = ( {url} ) => ({
     type: ROOM_SETTING_REQUEST,
+    url,
+})
+export const roomDeleteSuccess = () => ({
+  type: ROOM_DELETE_SUCCESS,
+})
+export const roomDeleteFailed = () => ({
+  type: ROOM_DELETE_FAILED,
 })
 
 
