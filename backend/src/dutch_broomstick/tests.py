@@ -113,6 +113,72 @@ class UserTestCase(APITestCase):
             self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
+class AuthentificatedTestCase(APITestCase):
+    def setUp(self):
+        self.user = User.objects.create(username='test', password='test!@#$')
+        self.client.force_authenticate(user=self.user)
+    
+    def tearDown(self):
+        self.client.force_authenticate(user=None)
+        self.user.delete()
+        self.user = None
+    
+    def create_room(self, roomname):
+        response = self.client.post(
+            f"/api/users/{self.user.username}/rooms/",
+            { 'roomname': roomname }, format='json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        return json.loads(response.content)
+    
+    def test_create_room(self):
+        # Room 생성 요청
+        room_url = self.create_room("test room").get('url')
+
+        # Layer도 같이 생성되는가?
+        room = Room.objects.get(url=room_url)
+        layers = Layer.objects.filter(room=room)
+        
+        self.assertEqual(layers.count(), 1)  # Layer가 1개만 생성되는가?
+        self.assertEqual(layers.first().number, 0)  # 해당 Layer는 0번인가?
+    
+    def test_create_payment(self):
+        room_json = self.create_room("test room")
+        room = Room.objects.get(url=room_json['url'])
+
+        Member.objects.create(room=room, membername='test1')
+        Member.objects.create(room=room, membername='test2')
+
+        # Payment 생성 요청
+        response = self.client.post(
+            f"/api/rooms/{room_json.get('url')}/layers/0/payments",
+            {
+                'fromWho': 'test1',
+                'forWhat': "고깃집",
+                'total': 2000.0,
+                'credits': [
+                    { 'toWho': 'test1', 'amount': 1000.0 },
+                    { 'toWho': 'test2', 'amount': 1000.0 }
+                ]
+            }, format='json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        # timestamp, layer, credits
+        payment = json.loads(response.content)
+        self.assertIsNotNone(payment.get('id'))
+        self.assertIsNotNone(payment.get('timestamp'))
+
+        credit_list = payment.get('credits')
+        self.assertEqual(len(credit_list), 2)
+        
+        amount = 0
+        for credit in credit_list:
+            amount += credit.get('amount')
+        
+        self.assertEqual(amount, payment.get('total'))
+
+
 class SerializerTest(TestCase):
     def test_payment_serializer(self):
         owner = User.objects.create(username="test_user", password="password")

@@ -35,6 +35,13 @@ class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
         fields = ('roomname', 'owner', 'url')
+    
+    def create(self, validated_data):
+        room = Room(**validated_data)
+        room.save()
+
+        Layer.objects.create(number=0, room=room)
+        return room
 
 
 class MemberSerializer(serializers.ModelSerializer):
@@ -73,7 +80,7 @@ class PaymentSerializer(serializers.ModelSerializer):
     layer = serializers.ReadOnlyField(source="layer.number")
     forWhat = serializers.CharField()
     fromWho = serializers.StringRelatedField()
-    credits = CreditSerializer(many=True, source="credit_set")
+    credits = CreditSerializer(many=True, source="credit_set", read_only=True)
 
     class Meta:
         model = Payment

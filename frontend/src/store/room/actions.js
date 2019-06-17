@@ -83,3 +83,8 @@ export const roomSetMember = member => ({
   type: ROOM_SET_MEMBER,
   member,
 })
+
+
+export const ROOM_TOGGLE_CONTENTS = "ROOM_TOGGLE_CONTENTS"
+
+export const roomToggleContents =  () => ({ type: ROOM_TOGGLE_CONTENTS })
