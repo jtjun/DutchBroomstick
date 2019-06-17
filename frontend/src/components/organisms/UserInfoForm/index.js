@@ -8,10 +8,9 @@ const UserInfoForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Field name="username" type="text" placeholder="Username" component={Input} />
-      {/*<Field name="credit" type="text" placeholder="Credit" component={Input} />*/}
-      <Field name="password" type="password" placeholder="Password" component={Input} />
-      <Field name="passwordRepeat" type="password" placeholder="PasswordRepeat" component={Input} />
+      <Field name="password" type="text" placeholder="password" component={Input} />
+      <Field name="name" type="text" placeholder="name" component={Input} />
+      <Field name="account" type="text" placeholder="account" component={Input} />
       <Button type="submit">변경</Button>
     </form>
   )

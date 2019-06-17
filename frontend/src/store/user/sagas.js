@@ -48,18 +48,15 @@ function* watchUserSignUpRequest() {
 }
 
 
-function* userInfoChangeRequest({ username, password, passwordRepeat }) {
-  if(password !== passwordRepeat){
-    yield put(userInfoChangeFailed( {passwordRepeat: ['password !== passwordRepeat'] } ))
-  }
-  else{
+function* userInfoChangeRequest({ password, name, account, username }) {
+
+
     try{
-      const response = yield api.put('/users/', { username, password })
-      yield put(userLoginRequest(username, password))
+      const response = yield api.put(`/users/${username}/`, { password, name, account })
+      yield put(userInfoChangeSuccess(password, name, account))
     } catch (e){
       yield put(userInfoChangeFailed(yield e.response.json()))
     }
-  }
 
 }
 
