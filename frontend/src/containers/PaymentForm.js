@@ -3,13 +3,15 @@ import { connect } from 'react-redux'
 import { reduxForm, formValueSelector, change } from 'redux-form'
 
 import { PaymentForm } from 'components'
+import { paymentCreateRequest } from 'store/actions'
 
 const FORM_NAME = 'payment'
 
 const PaymentReduxForm = reduxForm({
   form: FORM_NAME,
   onSubmit(values, dispatch) {
-    console.log(values)
+    const { room, ...payment } = values
+    dispatch(paymentCreateRequest(room, payment))
   }
 })(PaymentForm)
 
@@ -42,8 +44,9 @@ const mapDispatchToProps = dispatch => ({
 const PaymentFormContainer = ({...props}) => {
   const initialValues = {
     credits: props.members.map(
-      ({ membername }) => ({ membername, amount: 0.0 })
-    )
+      ({ membername }) => ({ toWho: membername, amount: 0.0 })
+    ),
+    room: props.room,
   } 
 
   return (

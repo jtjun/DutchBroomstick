@@ -90,9 +90,17 @@ class LayerDetailView(generics.RetrieveAPIView):
     lookup_field = 'number'
 
 
-class PaymentCreateView(RoomMixin, generics.CreateAPIView):
+class PaymentCreateView(RoomMixin, generics.ListCreateAPIView):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
+
+    def get_queryset(self):
+        kwargs = self.request.resolver_match.kwargs
+
+        room = self.get_room()
+        layer = room.layer_set.get(number=kwargs['number'])
+        
+        return Payment.objects.filter(layer=layer)
 
     def get_member(self, membername, room=None):
         if room is None:
