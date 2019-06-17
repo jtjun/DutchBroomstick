@@ -6,8 +6,7 @@ const RoomSettingForm = props => {
   const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit}>
-        <Button type="button">Add Layer</Button>
-        <Button type="button">Delete Room</Button>
+        <Button type="submit">Delete Room</Button>
     </form>
   );
 };

@@ -8,9 +8,9 @@ const RoomSettingPage = (props) => {
   console.log(props)
   return (
       <div>
-        <h1>{props.roomname}</h1>
         <Block>
-          <RoomSettingForm />
+        <h1>{props.roomname}</h1>
+          <RoomSettingForm initialValues={{url: props.url}} />
         </Block>
       </div>
   )
