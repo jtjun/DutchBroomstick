@@ -48,12 +48,10 @@ function* watchUserSignUpRequest() {
 }
 
 
-function* userInfoChangeRequest({ password, name, account, username }) {
-
-
+function* userInfoChangeRequest({ password, default_nickname, default_account, username, token }) {
     try{
-      const response = yield api.put(`/users/${username}/`, { password, name, account })
-      yield put(userInfoChangeSuccess(password, name, account))
+      const response = yield api.put(`/users/${username}/`, { username, password, default_nickname, default_account }, { token })
+      yield put(userInfoChangeSuccess(password, default_nickname, default_account))
     } catch (e){
       yield put(userInfoChangeFailed(yield e.response.json()))
     }

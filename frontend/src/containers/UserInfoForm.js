@@ -11,16 +11,18 @@ const UserInfoFormContainer = props => {
     )
 }
 
+const mapStateToProps = state => ({
+    username: state.user.username,
+    token: state.user.token,
+  })
+
+
 export default connect(mapStateToProps)(
     reduxForm({
         form: 'UserInfoChange',
         onSubmit(values, dispatch, props) {
-            // username을 change 가능? & 계좌내역도 가능하게 해야하나? 수정 필요
-            dispatch(userInfoChangeRequest(values.password, values.name, values.account, props.username))
+            dispatch(userInfoChangeRequest(values.password, values.name, values.account, props.username, props.token))
         }
     })(UserInfoFormContainer)
 )
 
-const mapStateToProps = state => ({
-    username: state.user.username,
-  })
