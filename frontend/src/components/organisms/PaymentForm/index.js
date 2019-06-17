@@ -12,6 +12,12 @@ const Label = styled.strong`
   font-size: 1.1em;
 `
 
+const TinyInput = styled(SimpleInput)`
+  text-align: right;
+  font-weight: normal;
+  margin: 0;
+`
+
 const Credit = ({ member: {membername}, index, ...props }) => (
   <TwoLineBlock
     upper={<Label>{membername}</Label>}
@@ -19,17 +25,18 @@ const Credit = ({ member: {membername}, index, ...props }) => (
       <Field
         name={`credits[${index}].amount`}
         type="number"
-        component={SimpleInput}
+        parse={value => value && Number(value)}
+        component={TinyInput}
       />
     }
   />
 )
 
-const PaymentForm = ({ handleSubmit, room, members, payment, ...props }) => {
+const PaymentForm = ({ handleSubmit, room, members, payment, amountLeft, total, nBbang, ...props }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <Block>
-        <FieldWithLabel label="결제 내용" name="forWhat" type="text" component={SimpleInput} />
+        <FieldWithLabel label="결제 내용" name="forWhat" type="text" component={SimpleInput} required />
         <FieldWithLabel label="결제자" name="fromWho" component={Select}>
           {members.map(
             ({ membername }) => (
@@ -39,15 +46,22 @@ const PaymentForm = ({ handleSubmit, room, members, payment, ...props }) => {
             )
           )}
         </FieldWithLabel>
-        <FieldWithLabel label="결제 금액" name="total" type="number" component={SimpleInput} />
+        <FieldWithLabel
+          label="결제 금액"
+          name="total"
+          type="number"
+          parse={value => value && Number(value)}
+          required
+          component={SimpleInput}
+        />
       </Block>
       <Block direction="row">
-        <Button light horizontal>N빵</Button>
-        <Button light horizontal>랜덤</Button>
-        <Button light horizontal>각자</Button>
+        <Button type="button" onClick={() => nBbang(total, members)} light horizontal>N빵</Button>
+        <Button type="button" light horizontal>랜덤</Button>
+        <Button type="button" light horizontal>각자</Button>
       </Block>
       <Block>
-        남은 돈 (자동 계산)
+        남은 돈 ({amountLeft})
         <hr />
         {members.map(
           (member, index) => (
@@ -56,10 +70,10 @@ const PaymentForm = ({ handleSubmit, room, members, payment, ...props }) => {
         )}
       </Block>
       <Block direction="row">
-        <Button light horizontal>
+        <Button type="button" light horizontal>
           <Link to={`/room/${room.url}/`}>취소</Link>
         </Button>
-        <Button horizontal type="submit">확인</Button>
+        <Button type="submit" horizontal>확인</Button>
       </Block>
     </Form>
   )
