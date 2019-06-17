@@ -40,7 +40,7 @@ class UserSerializer(serializers.ModelSerializer):
         except KeyError:
             pass
 
-        instance.save(**validated_data)
+        instance.save()
 
         Profile.objects.update_or_create(user=instance, **profile_data)
         return instance
