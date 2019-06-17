@@ -8,6 +8,7 @@ import {
   USER_SIGNUP_FAILED,
   USER_INFO_CHANGE_REQUEST,
   USER_INFO_CHANGE_FAILED,
+  USER_INFO_CHANGE_SUCCESS,
 } from 'store/actions'
 
 const initialState = {
@@ -56,9 +57,13 @@ const userReducer = (state = initialState, action) => {
       return {
         ...initialState,
       }
+    case USER_INFO_CHANGE_SUCCESS:
+      return{
+        ...initialState,
+      }  
     case USER_INFO_CHANGE_FAILED:
       return{
-        ...initialState
+        ...initialState,
       }
     default:
       return state
