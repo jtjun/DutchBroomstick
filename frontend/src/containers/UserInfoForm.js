@@ -21,8 +21,6 @@ export default connect(mapStateToProps)(
     })(UserInfoFormContainer)
 )
 
-
-
 const mapStateToProps = state => ({
     username: state.user.username,
   })

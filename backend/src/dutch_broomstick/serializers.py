@@ -26,6 +26,16 @@ class UserSerializer(serializers.ModelSerializer):
         Profile.objects.create(user=user, **profile_data)
         return user
 
+    def update(self, **kwargs):
+        try:
+            profile_data = self.validated_data.pop('profile')
+        except KeyError:
+            profile_data = {}
+            
+        instance = super.save(**kwargs)
+        Profile.objects.update_or_create(user=instance, **profile_data)
+        return instance
+
 
 class RoomSerializer(serializers.ModelSerializer):
     roomname = serializers.CharField()
