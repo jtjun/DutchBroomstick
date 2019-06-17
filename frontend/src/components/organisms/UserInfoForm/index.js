@@ -5,6 +5,7 @@ import { Button, Input } from 'components'
 const UserInfoForm = (props) => {
 
   const { handleSubmit } = props
+  console.log(props)
 
   return (
     <form onSubmit={handleSubmit}>
