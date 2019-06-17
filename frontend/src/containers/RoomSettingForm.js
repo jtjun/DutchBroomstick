@@ -13,6 +13,6 @@ const RoomSettingFormContainer = props => {
 export default reduxForm({
     form: 'RoomSetting',
     onSubmit(values, dispatch) {
-        dispatch(roomSettingRequest())
+        dispatch(roomSettingRequest({url: values.url}))
     }
 })(RoomSettingFormContainer)

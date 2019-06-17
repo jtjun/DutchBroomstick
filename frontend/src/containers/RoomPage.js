@@ -27,9 +27,6 @@ class RoomPageContainer extends React.Component {
     return <RoomPage {...this.props} />
   }
 
-  componentWillUnmount() {
-    this.props.onLeave()
-  }
 }
 
 const mapStateToProps = state => ({

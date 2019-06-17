@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import { Block, Button, Graph, List, ListItem, Header } from 'components'
 import { MemberList, PaymentList } from 'containers'
 import { getMemberDebtList, getSimplifiedGraph } from 'services/simplifier'
-
+import { Link } from 'react-router-dom'
+ 
 const RoomPage = props => {
   const { room, members, showPayment, onClickMember, onToggle } = props
   if (!room) return <Block transparent>Loading...</Block>
@@ -37,6 +38,9 @@ const RoomPage = props => {
       }
       <Block transparent>
         <a>로그아웃</a>
+      </Block>
+      <Block>
+        <Link to={`/room/${room.url}/setting/`}>button</Link>
       </Block>
     </div>
   )

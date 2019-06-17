@@ -4,8 +4,7 @@ import { RoomSettingPage } from 'components'
 import { Redirect } from 'react-router-dom'
 
 const RoomSettingPageContainer = (props) => {
-  
-  
+
   if( !props.roomname ){
     return(
       <Redirect to="/user/"/>
@@ -17,11 +16,11 @@ const RoomSettingPageContainer = (props) => {
     )
   }
 
-
 }
 
 const mapStateToProps = (state) => ({
-    roomname : state.room.room.roomname,
+    roomname: state.room.room.roomname,
+    url: state.room.room.url,
 })
 
 export default connect(mapStateToProps)(RoomSettingPageContainer)
