@@ -13,20 +13,48 @@ const Input = styled.input`
   padding: 10px 15px;
   width: 100%;
   max-width: 224px;
-  text-align: ${props => (props || "left")};
+  text-align: ${({ textAlign }) => textAlign};
 `
 
+Input.defaultProps = {
+  textAlign: 'left',
+}
+
+
+const SimpleInput = styled(Input)`
+  background: none;
+  border: none;
+  border-bottom: medium solid #404040;
+  border-radius: unset;
+  color: #404040;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  outline: none;
+  padding: 7px 15px 3px;
+  :focus {
+    border-bottom: medium solid #00b0f0;
+  }
+`
+
+SimpleInput.defaultProps = {
+  textAlign: 'center'
+}
+
+
 // for redux-form
-const InputField = ({ input, ...props }) => {
+const InputField = ({ input, simple, ...props }) => {
   const { value, onChange } = input;
+  const Component = simple ? SimpleInput : Input;
+
   return (
     <div>
-      <Input value={value} onChange={(e) => onChange(e.target.value)} {...props} />
+      <Component value={value} onChange={(e) => onChange(e.target.value)} {...props} />
     </div>
   )
 }
 
 InputField.propTypes = {
+  simple: PropTypes.bool,
   textAlign: PropTypes.string,
 }
 

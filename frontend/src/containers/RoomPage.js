@@ -28,7 +28,7 @@ class RoomPageContainer extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.onLeave()
+    // this.props.onLeave()
   }
 }
 

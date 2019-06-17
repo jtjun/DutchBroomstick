@@ -8,7 +8,7 @@ const PaymentList = ({ paymentlist, roomurl }) => (
   <div>
     <Block>
       새로운 계산이 생겼다면?
-      <Button>내역 추가</Button>
+      <Link to={`/room/${roomurl}/payment/`}><Button>내역 추가</Button></Link>
     </Block>
     <Block>
       <List>
