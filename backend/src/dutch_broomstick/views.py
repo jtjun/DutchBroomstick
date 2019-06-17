@@ -32,7 +32,7 @@ class RoomListCreateView(generics.ListCreateAPIView):
         serializer.save(owner=self.request.user)
 
 
-class RoomDetailView(generics.RetrieveAPIView):
+class RoomDetailView(generics.RetrieveDestroyAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
     lookup_field = 'url'
