@@ -26,6 +26,24 @@ class UserSerializer(serializers.ModelSerializer):
         Profile.objects.create(user=user, **profile_data)
         return user
 
+    def update(self, instance, validated_data):
+        print("print")
+        print(validated_data)
+        try:
+            profile_data = validated_data.pop('profile')
+        except KeyError:
+            profile_data = {}
+
+        try:
+            password = validated_data.pop('password')
+            instance.set_password(password)
+        except KeyError:
+            pass
+
+        instance.save(**validated_data)
+
+        Profile.objects.update_or_create(user=instance, **profile_data)
+        return instance
 
 
 class RoomSerializer(serializers.ModelSerializer):
