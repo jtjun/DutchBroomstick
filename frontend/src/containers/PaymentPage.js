@@ -9,6 +9,7 @@ const PaymentPageContainer = props => {
 
 const mapStateToProps = state => ({
   room: state.room.room,
+  members: state.member.members,
   payment: state.payment.payment,
 })
 
