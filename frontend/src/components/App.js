@@ -30,8 +30,8 @@ const App = () => {
         <Route path="/user/:room_id/entrance/" component={EntrancePage} />
         <Route path="/room/:room_id/setting/" component={RoomSettingPage} />
         <Route path="/room/:room_id/payment_list/" component={PaymentListPage} />
-        <Route path="/room/:room_id/member/:member/" component={IndividualPage} />
-        <Route path="/room/:room_id/member/:member/:member" component={AccountPage} />
+        <Route path="/room/:room_id/member/:member/" component={IndividualPage} exact />
+        <Route path="/room/:room_id/member/:member/:to" component={AccountPage} />
         
       </Switch>
     </ThemeProvider>

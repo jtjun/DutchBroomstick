@@ -28,8 +28,8 @@ const mapStateToProps = (state) => ({
     nickname : state.room.member.membername,
     roomname : state.room.room.roomname,
     
-    sendmoneylist : state.payment.sendmoneylist,
-    getmoneylist : state.payment.getmoneylist,
+    sendlist : state.payment.sendlist,
+    getlist : state.payment.getlist,
     roomurl : state.room.room.url
 })
 
