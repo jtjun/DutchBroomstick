@@ -1,4 +1,4 @@
-import { push } from 'connected-react-router'
+import { push, replace } from 'connected-react-router'
 import { fork, takeEvery, put } from 'redux-saga/effects'
 import { toastr } from 'react-redux-toastr'
 import api from 'services/api'
@@ -28,7 +28,7 @@ function* roomCreateRequest({ roomname, members, username, token }){
       { icon: 'success', status: 'success', }
     )
     yield put(actions.roomCreateSuccess(room))
-    yield put(push(`/room/${room.url}/`))
+    yield put(replace(`/room/${room.url}/`))
   } catch(e) {
     console.log(e)
   }
@@ -61,7 +61,8 @@ function* getRequest({ url }) {
     yield put(memberGetRequest(url))
     yield put(paymentGetRequest(room))
   } catch(e) {
-    yield put(actions.roomGetFailed(e))
+    yield put(actions.roomGetFailed(yield e.response.json()))
+    yield put(push(`/user/`))
   }
 }
 
@@ -74,9 +75,11 @@ function* watchRoomGetRequest() {
 function* deleteRequest( { url } ) {
 
   try {
-    const room = yield api.delete(`/rooms/${url}/`)
-    yield put(actions.roomDeleteSuccess())
+    yield api.delete(`/rooms/${url}/`)
+    yield put(actions.roomDeleteSuccess(url))
+    yield put(replace(`/user/`))
   } catch(e) {
+    console.log(e)
     yield put(actions.roomDeleteFailed(e))
   }
 
