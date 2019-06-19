@@ -5,9 +5,11 @@ import { Button, Header, List, Block, ListItem } from 'components'
 
 const IndividualPage = ({ sendlist, getlist, roomurl, nickname }) => (
 
+    /*
     sendlist = [{to:"1", label:"123"}],
     roomurl = "cenkuwj",
     nickname = "1",
+    */
 
     <div>
         <Header />
