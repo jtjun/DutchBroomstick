@@ -31,11 +31,13 @@ export const roomSettingRequest = ( {url} ) => ({
     type: ROOM_SETTING_REQUEST,
     url,
 })
-export const roomDeleteSuccess = () => ({
+export const roomDeleteSuccess = ( url ) => ({
   type: ROOM_DELETE_SUCCESS,
+  url,
 })
-export const roomDeleteFailed = () => ({
+export const roomDeleteFailed = error => ({
   type: ROOM_DELETE_FAILED,
+  error,
 })
 
 
