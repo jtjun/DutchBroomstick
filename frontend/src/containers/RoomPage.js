@@ -33,7 +33,7 @@ const mapStateToProps = state => ({
   room: state.room.room,
   member: state.room.member,
   members: state.member.members,
-  payments: state.room.payments,
+  payments: state.payment.payments,
   showPayment: state.room.showPayment,
 })
 

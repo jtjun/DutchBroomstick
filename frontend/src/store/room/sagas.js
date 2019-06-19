@@ -7,7 +7,7 @@ import api from 'services/api'
  */
 
 import * as actions from './actions'
-import { memberGetRequest } from 'store/actions'
+import { memberGetRequest, paymentGetRequest } from 'store/actions'
 
 
 /* Room Create Request */
@@ -57,6 +57,7 @@ function* getRequest({ url }) {
     const room = yield api.get(`/rooms/${url}/`)
     yield put(actions.roomGetSuccess(room))
     yield put(memberGetRequest(url))
+    yield put(paymentGetRequest(room))
   } catch(e) {
     yield put(actions.roomGetFailed(e))
   }

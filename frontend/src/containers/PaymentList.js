@@ -22,7 +22,7 @@ const PaymentListContainer = (props) => {
 const mapStateToProps = (state) => ({
     username : state.user.username,
     roomname : state.room.room.roomname,
-    paymentlist : state.payment.paymentlist,
+    paymentlist : state.payment.payments,
     roomurl : state.room.room.url,
 })
 
