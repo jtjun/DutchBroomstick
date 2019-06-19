@@ -5,7 +5,13 @@ import { reducer as form } from 'redux-form'
 import { reducer as thunk } from 'redux-saga-thunk'
 import { reducer as toastr } from 'react-redux-toastr'
 
+import { createBrowserHistory } from 'history'
+import { connectRouter } from 'connected-react-router'
+
+export const history = createBrowserHistory()
+
 const reducers = {
+  router: connectRouter(history),
   form,
   thunk,
   toastr,

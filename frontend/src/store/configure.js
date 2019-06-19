@@ -3,8 +3,12 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { isDev, isBrowser } from 'config'
 import middlewares from './middlewares'
-import reducer from './reducer'
+import reducer, { history as historyFromReducer } from './reducer'
 import sagas from './sagas'
+
+import { routerMiddleware } from 'connected-react-router'
+
+export const history = historyFromReducer
 
 const devtools = isDev && isBrowser && window.devToolsExtension
   ? window.devToolsExtension
@@ -16,7 +20,8 @@ const configureStore = (initialState, services = {}) => {
   const enhancers = [
     applyMiddleware(
       ...middlewares,
-      sagaMiddleware
+      routerMiddleware(history),
+      sagaMiddleware,
     ),
     devtools(),
   ]

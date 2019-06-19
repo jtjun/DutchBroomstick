@@ -4,13 +4,14 @@ import 'babel-polyfill'
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
+//import { BrowserRouter } from 'react-router-dom'
+import { ConnectedRouter } from 'connected-react-router'
 import ReduxToastr from 'react-redux-toastr'
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
 
 
 import { basename } from 'config'
-import configureStore from 'store/configure'
+import configureStore, { history } from 'store/configure'
 import api from 'services/api'
 import App from 'components/App'
 
@@ -19,9 +20,9 @@ const store = configureStore({}, { api: api.create() })
 const renderApp = () => (
   <Provider store={store}>
     <div>
-      <BrowserRouter basename={basename}>
+      <ConnectedRouter basename={basename} history={history}>
         <App />
-      </BrowserRouter>
+      </ConnectedRouter>
       <ReduxToastr
         transitionIn="fadeIn"
         transitionOut="fadeOut"
