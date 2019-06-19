@@ -7,12 +7,9 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 const AccountPage = ({ match, roomname, sendlist, members }) => {
     const to = match.params.to
     const toname = to
-    console.log(toname)
-    console.log(sendlist)
     const edge = sendlist.find(m=> m.to == toname)
-    console.log(edge)
     const member = members.find(m=> m.membername == toname)
-    console.log(member)
+    console.log(members)
     const money = edge.label
     const account = member.account
     console.log(account)
@@ -30,7 +27,7 @@ const AccountPage = ({ match, roomname, sendlist, members }) => {
             </Block>
 
             <CopyToClipboard 
-                text={`${account} ${toname}`}
+                text={`${account} ${toname} ${money}원`}
                 onCopy={() => { }}>
                 <span>
                     <Button>
