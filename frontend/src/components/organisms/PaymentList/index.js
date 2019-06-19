@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Button, List, Block } from 'components'
+import { Button, List, ListItem, Block } from 'components'
 
 
 const PaymentList = ({ paymentlist, roomurl }) => (
@@ -15,7 +15,7 @@ const PaymentList = ({ paymentlist, roomurl }) => (
         {
           paymentlist && paymentlist.map(
             ({ forWhat, fromWho, total }, idx) => (
-              <Listitem key={idx} title={`${forWhat}${fromWho}`} description={total} linkTo={`/room/:${roomurl}/payment_list/${forWhat}`} />
+              <ListItem key={idx} title={`${forWhat}${fromWho}`} description={total} linkTo={`/room/:${roomurl}/payment_list/${forWhat}`} />
             )
           )
         }

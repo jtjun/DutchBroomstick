@@ -7,13 +7,17 @@ import { getMemberDebtList, getSimplifiedGraph } from 'services/simplifier'
 import { Link } from 'react-router-dom'
  
 const RoomPage = props => {
-  const { room, members, showPayment, onClickMember, onToggle } = props
+  const { room, members, showPayment, payments, onClickMember, onToggle } = props
   if (!room) return <Block transparent>Loading...</Block>
-  
-  // const graph = getSimplifiedGraph(getMemberDebtList(props.payments))
+
   const graph = {
     nodes: (members || []).map(m => ({ id: m.membername, label: m.membername })),
     edges: [],
+  }
+
+  if (payments) {
+    const { edges } = getSimplifiedGraph(getMemberDebtList(payments))
+    graph.edges = edges
   }
 
   const events = {
