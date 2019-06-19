@@ -23,7 +23,12 @@ const RoomPage = props => {
   const events = {
     selectNode(evt) {
       const nodeId = evt.nodes.find(() => true)
-      onClickMember(members.find(m => m.membername === nodeId))
+      const member = members.find(m => m.membername === nodeId)
+      onClickMember(
+        member,
+        graph.edges.filter(({from}) => from === nodeId),
+        graph.edges.filter(({to}) => to === nodeId),
+      )
     }
   }
 

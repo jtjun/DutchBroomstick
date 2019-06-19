@@ -89,9 +89,11 @@ export const roomLeave = () => ({ type: ROOM_LEAVE })
 
 export const ROOM_SET_MEMBER = "ROOM_SET_MEMBER"
 
-export const roomSetMember = member => ({
+export const roomSetMember = (member, sendlist, getlist) => ({
   type: ROOM_SET_MEMBER,
   member,
+  sendlist,
+  getlist,
 })
 
 

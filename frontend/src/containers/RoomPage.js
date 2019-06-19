@@ -40,7 +40,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onGetRoom: (url) => dispatch(roomGetRequest(url)),
   onLeave: () => dispatch(roomLeave()),
-  onClickMember: member => dispatch(roomSetMember(member)),
+  onClickMember: (member, sendlist, getlist) => {
+    dispatch(roomSetMember(member, sendlist, getlist))
+  },
   onToggle: () => dispatch(roomToggleContents()),
 })
 
