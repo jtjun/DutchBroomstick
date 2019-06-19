@@ -21,7 +21,8 @@ export default connect(mapStateToProps)(
     reduxForm({
         form: 'UserInfoChange',
         onSubmit(values, dispatch, props) {
-            dispatch(userInfoChangeRequest(values.password, values.name, values.account, props.username, props.token))
+            dispatch(userInfoChangeRequest(values.password, values.default_nickname, values.default_account, props.username, props.token))
+            console.log(values)
         }
     })(UserInfoFormContainer)
 )

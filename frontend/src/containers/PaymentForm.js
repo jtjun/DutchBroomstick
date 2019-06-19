@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { reduxForm, formValueSelector, change } from 'redux-form'
+import { toastr } from 'react-redux-toastr'
+import { reduxForm, formValueSelector, change, SubmissionError } from 'redux-form'
 
 import { PaymentForm } from 'components'
 import { paymentCreateRequest } from 'store/actions'
@@ -11,6 +12,18 @@ const PaymentReduxForm = reduxForm({
   form: FORM_NAME,
   onSubmit(values, dispatch) {
     const { room, ...payment } = values
+    const validationError = message => {
+      toastr.light(
+        "결제 추가 오류", message,
+        { icon: 'error', status: 'error' }
+      )
+      throw new SubmissionError({ _error: message})
+    }
+
+    if (payment.total !== payment.credits.map(c => c.amount).reduce((a,b)=>(a+b),0)) {
+      validationError("남은 돈이 0이 아닙니다!")
+    }
+
     dispatch(paymentCreateRequest(room, payment))
   }
 })(PaymentForm)

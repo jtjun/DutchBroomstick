@@ -43,7 +43,10 @@ class UserSerializer(serializers.ModelSerializer):
 
         instance.save()
 
-        Profile.objects.update_or_create(user=instance, **profile_data)
+        profile = Profile.objects.get(user=instance)
+        profile.default_account = profile_data.get('default_account', profile.default_account)
+        profile.default_nickname = profile_data.get('default_nickname', profile.default_nickname)
+        profile.save()
         return instance
 
 

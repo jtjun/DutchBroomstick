@@ -1,33 +1,60 @@
 import React from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
-import { Block, Button, Graph, List, ListItem, Header } from 'components'
+import { Block, Button, Graph, List, LinkButton, ListItem, Header } from 'components'
 import { MemberList, PaymentList } from 'containers'
 import { getMemberDebtList, getSimplifiedGraph } from 'services/simplifier'
 import { Link } from 'react-router-dom'
  
+const SettingButton = styled(LinkButton)`
+  align-self: flex-end;  
+  background: url('/settings.png');
+  border: 0;
+  outline: 0;
+  margin: -32px 0 0;
+  padding: 0;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+`
+
 const RoomPage = props => {
-  const { room, members, showPayment, onClickMember, onToggle } = props
+  const { room, members, showPayment, payments, onClickMember, onToggle } = props
   if (!room) return <Block transparent>Loading...</Block>
-  
-  // const graph = getSimplifiedGraph(getMemberDebtList(props.payments))
+
   const graph = {
     nodes: (members || []).map(m => ({ id: m.membername, label: m.membername })),
     edges: [],
   }
 
+  if (payments) {
+    const { edges } = getSimplifiedGraph(getMemberDebtList(payments))
+    graph.edges = edges
+  }
+
   const events = {
     selectNode(evt) {
       const nodeId = evt.nodes.find(() => true)
-      onClickMember(members.find(m => m.membername === nodeId))
+      const member = members.find(m => m.membername === nodeId)
+      onClickMember(
+        member,
+        graph.edges.filter(({from}) => from === nodeId),
+        graph.edges.filter(({to}) => to === nodeId),
+      )
     }
   }
 
   return (
     <div>
-      <Header />
+      <Header />      
       <Block transparent>
+        <CopyToClipboard text={window.location.href} onCopy={() => {}}>
+          <Button>링크 복사</Button>
+        </CopyToClipboard>
         <Graph graph={graph} events={events} />
+        <SettingButton to={`/room/${room.url}/setting/`} />
       </Block>
       <Button onClick={onToggle}>
         {showPayment ? "멤버 목록 보기" : "결제 목록 보기"}
@@ -36,12 +63,7 @@ const RoomPage = props => {
         (<PaymentList />) :
         (members && <MemberList />)
       }
-      <Block transparent>
-        <a>로그아웃</a>
-      </Block>
-      <Block>
-        <Link to={`/room/${room.url}/setting/`}>button</Link>
-      </Block>
+
     </div>
   )
 }

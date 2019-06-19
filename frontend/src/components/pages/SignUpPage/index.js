@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { Block } from 'components'
+import { Block, Header } from 'components'
 import { SignUpForm } from 'containers'
 
 const SignUpPage = (props) => {
   return (
     <div>
+      <Header />
       <Block>
         <h1>Dutch Broomstick</h1>
         <SignUpForm />

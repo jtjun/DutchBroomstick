@@ -49,7 +49,6 @@ const roomReducer = (state = initialState, action) => {
     case actions.ROOM_CREATE_SUCCESS:
       return {
         ...state,
-        room: action.room,
         roomList: [
           ...state.roomList,
           action.room,
@@ -61,15 +60,19 @@ const roomReducer = (state = initialState, action) => {
       return{
         ...initialState,
       }
-    case action.ROOM_DELETE_SUCCESS:
-      return{
-        ...initialState,
-      }
+    
     case action.ROOM_DELETE_FAILED:
       return{
         ...initialState,
       }
     */
+    case actions.ROOM_DELETE_SUCCESS:
+      return {
+        ...state,
+        roomList: state.roomList.slice().filter(
+          room => room.url !== action.url
+        ),
+      }
     case actions.ROOM_LIST_SUCCESS:
       return {
         ...state,
