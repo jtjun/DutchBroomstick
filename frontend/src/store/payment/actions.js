@@ -40,3 +40,11 @@ export const paymentGetFailed = error => ({
   type: PAYMENT_GET_FAILED,
   error,
 })
+
+export const ACCOUNT_IN_REQUEST = "ACCOUNT_IN_REQUEST"
+
+export const accountinRequest = ( toname, member ) => ({
+  type : ACCOUNT_IN_REQUEST,
+  toname,
+  member,
+})

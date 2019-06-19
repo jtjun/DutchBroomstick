@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
  * import할 때 복잡하게 상대참조 할 필요 없이 'components', 'containers'만 지정해주면 된다.
  * ???Form 계열, ???Page 계열은 redux 로직이 필요하므로 'components'가 아닌 'containers'에서 import 한다.
  */ 
-import { Block } from 'components'
+import { Block, Header } from 'components'
 import { LoginForm } from 'containers'
 
 /**
@@ -17,8 +17,8 @@ import { LoginForm } from 'containers'
 const MainPage = (props) => {
   return (
     <div>
+      <Header />
       <Block>
-        <h1>Dutch Broomstick</h1>
         <LoginForm />
       </Block>
       <Block>

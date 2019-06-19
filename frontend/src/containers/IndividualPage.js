@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom'
 
 const IndividualPageContainer = (props) => {
   
+  /*
   if( !props.roomname ){
     return(
         <Redirect to="/" />
@@ -20,6 +21,10 @@ const IndividualPageContainer = (props) => {
       <IndividualPage {...props} />
     )
   }
+  */
+  return (
+    <IndividualPage {...props} />
+  )
 
 }
 
@@ -33,4 +38,8 @@ const mapStateToProps = (state) => ({
     roomurl : state.room.room.url
 })
 
-export default connect(mapStateToProps)(IndividualPageContainer)
+const mapDispatchToProps = dispatch => ({
+
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(IndividualPageContainer)

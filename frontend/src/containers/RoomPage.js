@@ -17,7 +17,7 @@ class RoomPageContainer extends React.Component {
     const { room, member } = this.props
 
     if (member) {
-      return <Redirect to={`/room/${room.url}/${member.id}/`} />
+      return <Redirect to={`/room/${room.url}/member/${member.id}/`} />
     }
     
     if (room) {

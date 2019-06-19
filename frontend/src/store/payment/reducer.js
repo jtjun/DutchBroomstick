@@ -19,6 +19,14 @@ import * as actions from './actions';
   
   const paymentReducer = (state = initialState, action) => {
     switch(action.type) {
+      case actions.ACCOUNT_IN_REQUEST:
+        const edge = state.getlist.find(m => action.toname == m.to)
+        const acc = action.member.find(m => edge.to == m.membername)
+        return {
+          ...state,
+          senddata: edge,
+          accounts: acc.account,
+        }
       case actions.PAYMENT_CREATE_SUCCESS:
         return {
           ...state,
