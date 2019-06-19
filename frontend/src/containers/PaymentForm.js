@@ -54,16 +54,25 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
-const PaymentFormContainer = ({...props}) => {
-  const initialValues = {
-    credits: props.members.map(
-      ({ membername }) => ({ toWho: membername, amount: 0.0 })
-    ),
-    room: props.room,
-  } 
+const PaymentFormContainer = ({payment, ...props}) => {
+  const initialValues = (payment ? 
+    {  // if payment exists
+      ...payment,
+      room: props.room,
+    } :
+    {  // if payment doesn't exist
+      credits: props.members.map(
+        ({ membername }) => ({ toWho: membername, amount: 0.0 })
+      ),
+      room: props.room,
+    }
+  )
+
+  console.log(initialValues)
 
   return (
     <PaymentReduxForm
+      disabled={!!payment}
       initialValues={initialValues}
       {...props}
     />

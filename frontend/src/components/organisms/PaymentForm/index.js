@@ -32,7 +32,8 @@ const Credit = ({ member: {membername}, index, ...props }) => (
   />
 )
 
-const PaymentForm = ({ handleSubmit, room, members, payment, amountLeft, total, nBbang, ...props }) => {
+const PaymentForm = ({ handleSubmit, room, members, payment, amountLeft, total, nBbang, ...rest }) => {
+  const { disabled } = rest
   return (
     <Form onSubmit={handleSubmit}>
       <Block>
@@ -78,7 +79,7 @@ const PaymentForm = ({ handleSubmit, room, members, payment, amountLeft, total, 
         >
             취소
         </LinkButton>
-        <Button type="submit" horizontal>확인</Button>
+        <Button type="submit" horizontal disabled={disabled}>확인</Button>
       </Block>
     </Form>
   )

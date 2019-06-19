@@ -3,14 +3,16 @@ import { connect } from 'react-redux'
 
 import { PaymentPage } from 'components'
 
-const PaymentPageContainer = props => {
-  return <PaymentPage {...props} />
+const PaymentPageContainer = ({ match, payments, ...props }) => {
+  const paymentId = parseInt(match.params.payment_id)
+  const payment = payments.find(p => p.id === paymentId)
+  return <PaymentPage payment={payment} {...props} />
 }
 
 const mapStateToProps = state => ({
   room: state.room.room,
   members: state.member.members,
-  payment: state.payment.payment,
+  payments: state.payment.payments,
 })
 
 export default connect(mapStateToProps)(PaymentPageContainer)

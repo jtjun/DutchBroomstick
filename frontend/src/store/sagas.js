@@ -11,7 +11,7 @@ const req = require.context('.', true, /\.\/.+\/sagas\.js$/)
 const sagas = req.keys().map(key => req(key).default)
 
 sagas.push(function* () {
-  yield takeEvery(a => a.error, function* ({ type, error }) {
+  yield takeEvery(a => a.error && a.type[0] !== '@', function* ({ type, error }) {
     toastError(type, JSON.stringify(error))
   })
 })

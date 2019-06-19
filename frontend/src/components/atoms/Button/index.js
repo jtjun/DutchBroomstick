@@ -16,6 +16,12 @@ const Button = styled.button`
   width: 100%;
   max-width: 224px;
   z-index: 1;
+
+  :disabled {
+    background-color: lightgrey;
+    color: grey;
+    cursor: none;
+  }
 `
 
 const LightButton = styled(Button)`
