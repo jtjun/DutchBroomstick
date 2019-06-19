@@ -151,7 +151,7 @@ class AuthentificatedTestCase(APITestCase):
 
         # Payment 생성 요청
         response = self.client.post(
-            f"/api/rooms/{room_json.get('url')}/layers/0/payments",
+            f"/api/rooms/{room_json.get('url')}/layers/0/payments/",
             {
                 'fromWho': 'test1',
                 'forWhat': "고깃집",
