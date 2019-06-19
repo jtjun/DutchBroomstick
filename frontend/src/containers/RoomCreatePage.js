@@ -9,16 +9,16 @@ const RoomCreatePageContainer = (props) => {
   if ( !username ) {
     return <Redirect to="/" />
   }
-  else if( room ) {
-    return <Redirect to={`/room/${room.url}/`}/>
-  } 
+  // else if( room ) {
+  //   return <Redirect to={`/room/${room.url}/`}/>
+  // } 
   else {
     return <RoomCreatePage {...props} />
   }
 }
 
 const mapStateToProps = state => ({
-  room: state.room.room,
+  // room: state.room.room,
   username: state.user.username,
   token: state.user.token,
 })

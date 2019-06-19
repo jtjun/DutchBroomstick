@@ -1,3 +1,4 @@
+import { push } from 'connected-react-router'
 import { fork, takeEvery, put } from 'redux-saga/effects'
 import { toastr } from 'react-redux-toastr'
 import api from 'services/api'
@@ -27,6 +28,7 @@ function* roomCreateRequest({ roomname, members, username, token }){
       { icon: 'success', status: 'success', }
     )
     yield put(actions.roomCreateSuccess(room))
+    yield put(push(`/room/${room.url}/`))
   } catch(e) {
     console.log(e)
   }
