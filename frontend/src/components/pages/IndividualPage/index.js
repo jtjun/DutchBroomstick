@@ -1,9 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Button, Header, List, Block } from 'components'
+import { Button, Header, List, Block, ListItem } from 'components'
 
 const IndividualPage = ({ sendlist, getlist, roomurl, nickname }) => (
+
+    sendlist = [{to:"1", label:"123"}],
+    roomurl = "cenkuwj",
+    nickname = "1",
+
     <div>
         <Header />
 
@@ -13,7 +18,7 @@ const IndividualPage = ({ sendlist, getlist, roomurl, nickname }) => (
                 {
                     sendlist && sendlist.map(
                         ({ to, label }, idx) => (
-                            <Listitem key={idx} title={to} description={label} linkTo={`/room/${roomurl}/member/${nickname}/${to}`} />
+                            <ListItem key={idx} title={to} description={`${label}원`} linkTo={`/room/${roomurl}/member/${nickname}/${to}`} />
                         )
                     )
                 }
@@ -22,11 +27,12 @@ const IndividualPage = ({ sendlist, getlist, roomurl, nickname }) => (
 
         <Block>
             <h1>받을 돈</h1>
+            
             <List>
                 {
                     getlist && getlist.map(
                         ({ to, label }, idx) => (
-                            <Listitem key={idx} title={to} description={label} linkTo={`NULL_NEED_TO_CHANGE`} />
+                            <ListItem key={idx} title={to} description={label} />
                         )
                     )
                 }
