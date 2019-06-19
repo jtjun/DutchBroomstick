@@ -1,11 +1,24 @@
 import React from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import { Block, Button, Graph, List, ListItem, Header } from 'components'
+import { Block, Button, Graph, List, LinkButton, ListItem, Header } from 'components'
 import { MemberList, PaymentList } from 'containers'
 import { getMemberDebtList, getSimplifiedGraph } from 'services/simplifier'
 import { Link } from 'react-router-dom'
  
+const SettingButton = styled(LinkButton)`
+  align-self: flex-end;  
+  background: url('/settings.png');
+  border: 0;
+  outline: 0;
+  margin: -32px 0 0;
+  padding: 0;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+`
+
 const RoomPage = props => {
   const { room, members, showPayment, payments, onClickMember, onToggle } = props
   if (!room) return <Block transparent>Loading...</Block>
@@ -37,6 +50,7 @@ const RoomPage = props => {
       <Header />
       <Block transparent>
         <Graph graph={graph} events={events} />
+        <SettingButton to={`/room/${room.url}/setting/`} />
       </Block>
       <Button onClick={onToggle}>
         {showPayment ? "멤버 목록 보기" : "결제 목록 보기"}
@@ -47,9 +61,6 @@ const RoomPage = props => {
       }
       <Block transparent>
         <a>로그아웃</a>
-      </Block>
-      <Block>
-        <Link to={`/room/${room.url}/setting/`}>button</Link>
       </Block>
     </div>
   )
