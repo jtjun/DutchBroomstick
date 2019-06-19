@@ -16,7 +16,7 @@ import { ACCOUNT_IN_REQUEST } from './actions';
   const paymentReducer = (state = initialState, action) => {
     switch(action.type) {
       case ACCOUNT_IN_REQUEST:
-        const edge = getlist.find(m => action.toname == m.to)
+        const edge = state.getlist.find(m => action.toname == m.to)
         const acc = action.member.find(m => edge.to == m.membername)
         return {
           ...state,
