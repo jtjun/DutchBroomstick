@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { reduxForm, formValueSelector, arrayPush, change } from 'redux-form'
+import { toastr } from 'react-redux-toastr'
+import { reduxForm, formValueSelector, arrayPush, change, SubmissionError } from 'redux-form'
 import { RoomCreateForm } from 'components'
 
 import { roomCreateRequest } from 'store/actions'
@@ -33,6 +34,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     onSubmit(values, dispatch, props) {
       const { roomname, members } = values
       const { username, token } = props  // username means ownername
+
+      if (!(members && members.length)) {
+        toastr.light(
+          "방 생성 오류", "화면 하단에서 다른 멤버를 최소 1명 추가해주세요.",
+          { icon: 'error', status: 'error' }
+        )
+        return
+      }
       dispatch(roomCreateRequest(roomname, members, username, token))
     }
   })(RoomCreateFormContainer)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
+import { push } from 'connected-react-router'
 import { connect } from 'react-redux'
 import { RoomPage } from 'components'
 
@@ -14,11 +14,7 @@ class RoomPageContainer extends React.Component {
   }
 
   render() {
-    const { room, member } = this.props
-
-    if (member) {
-      return <Redirect to={`/room/${room.url}/member/${member.id}/`} />
-    }
+    const { room, } = this.props
     
     if (room) {
       document.title = `${this.props.room.roomname} - Dutch Broomstick`
@@ -31,7 +27,6 @@ class RoomPageContainer extends React.Component {
 
 const mapStateToProps = state => ({
   room: state.room.room,
-  member: state.room.member,
   members: state.member.members,
   payments: state.payment.payments,
   showPayment: state.room.showPayment,
@@ -42,6 +37,7 @@ const mapDispatchToProps = dispatch => ({
   onLeave: () => dispatch(roomLeave()),
   onClickMember: (member, sendlist, getlist) => {
     dispatch(roomSetMember(member, sendlist, getlist))
+    dispatch(push(`member/${member.id}/`))
   },
   onToggle: () => dispatch(roomToggleContents()),
 })

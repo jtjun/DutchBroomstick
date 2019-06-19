@@ -13,6 +13,8 @@ matrix:
     - language: node_js
       node_js: 8
       install:
-        - yarn install
+        - npm install
       before_install:
         - cd frontend
+      script:
+        - npm test
