@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Link, } from 'react-router-dom'
 import { Form, Field, } from 'redux-form'
 
-import { Block, Button, FieldWithLabel, Input, Select, TwoLineBlock, } from 'components'
+import { Block, Button, FieldWithLabel, Input, LinkButton, Select, TwoLineBlock, } from 'components'
 
 const SimpleInput = props => <Input simple {...props} />
 
@@ -37,7 +37,8 @@ const PaymentForm = ({ handleSubmit, room, members, payment, amountLeft, total, 
     <Form onSubmit={handleSubmit}>
       <Block>
         <FieldWithLabel label="결제 내용" name="forWhat" type="text" component={SimpleInput} required />
-        <FieldWithLabel label="결제자" name="fromWho" component={Select}>
+        <FieldWithLabel label="결제자" name="fromWho" component={Select} required>
+          <option selected value="">-- 멤버 목록 --</option>
           {members.map(
             ({ membername }) => (
               <option key={membername} value={membername}>
@@ -70,9 +71,13 @@ const PaymentForm = ({ handleSubmit, room, members, payment, amountLeft, total, 
         )}
       </Block>
       <Block direction="row">
-        <Button type="button" light horizontal>
-          <Link to={`/room/${room.url}/`}>취소</Link>
-        </Button>
+        <LinkButton
+          type="button" 
+          to={`/room/${room.url}/`}
+          light horizontal
+        >
+            취소
+        </LinkButton>
         <Button type="submit" horizontal>확인</Button>
       </Block>
     </Form>
