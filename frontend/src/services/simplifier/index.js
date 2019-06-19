@@ -32,6 +32,7 @@ export const getSimplifiedGraph = debts => {
   const indice = members.slice()  // 배열 복사
   while (indice.length) {
     const first = indice[0], last = indice[indice.length - 1]
+    if(debts[first] === 0) break;
     const amount = Math.min(
       debts[first], -debts[last]
     )

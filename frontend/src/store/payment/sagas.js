@@ -1,4 +1,5 @@
 import { fork, takeEvery, put } from 'redux-saga/effects'
+import { push, replace } from 'connected-react-router'
 import api from 'services/api'
 
 import * as actions from './actions'
@@ -7,6 +8,7 @@ function* createRequest({ room, payment }) {
   try {
     const newPayment = yield api.post(`/rooms/${room.url}/layers/0/payments/`, { ...payment })
     yield put(actions.paymentCreateSuccess(room, newPayment))
+    yield put(replace(`/room/${room.url}/`))
   } catch(e) {
     yield put(actions.paymentCreateFailed(yield e.response.json()))
   }

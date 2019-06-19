@@ -18,7 +18,6 @@ const SettingButton = styled(LinkButton)`
   height: 32px;
   width: 32px;
   cursor: pointer;
-  z-index: 1;
 `
 
 const RoomPage = props => {
@@ -64,9 +63,7 @@ const RoomPage = props => {
         (<PaymentList />) :
         (members && <MemberList />)
       }
-      <Block transparent>
-        <a>로그아웃</a>
-      </Block>
+
     </div>
   )
 }
