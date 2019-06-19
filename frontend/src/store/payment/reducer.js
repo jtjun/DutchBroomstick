@@ -1,5 +1,6 @@
 import {
   ROOM_LEAVE,
+  ROOM_SET_MEMBER,
 } from 'store/actions'
 import * as actions from './actions';
   
@@ -34,6 +35,12 @@ import * as actions from './actions';
       case ROOM_LEAVE:
         return {
           ...initialState,
+        }
+      case ROOM_SET_MEMBER:
+        return {
+          ...state,
+          sendlist: action.sendlist,
+          getlist: action.getlist,
         }
       default:
         return state
