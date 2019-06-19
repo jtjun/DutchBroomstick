@@ -1,6 +1,8 @@
 import {
-  } from 'store/actions'
-import { ACCOUNT_IN_REQUEST } from './actions';
+  ROOM_LEAVE,
+  ROOM_SET_MEMBER,
+} from 'store/actions'
+import * as actions from './actions';
   
   const initialState = {
     //after simplify, if room -> individual, update a member's send or get datas 
@@ -11,11 +13,13 @@ import { ACCOUNT_IN_REQUEST } from './actions';
     //if individual -> account, update a senddata and call data's member's account
     senddata : null,
     accounts : null,
+
+    payments: null,  // 방의 결제 정보
   }
   
   const paymentReducer = (state = initialState, action) => {
     switch(action.type) {
-      case ACCOUNT_IN_REQUEST:
+      case actions.ACCOUNT_IN_REQUEST:
         const edge = state.getlist.find(m => action.toname == m.to)
         const acc = action.member.find(m => edge.to == m.membername)
         return {
@@ -23,7 +27,29 @@ import { ACCOUNT_IN_REQUEST } from './actions';
           senddata: edge,
           accounts: acc.account,
         }
-
+      case actions.PAYMENT_CREATE_SUCCESS:
+        return {
+          ...state,
+          payments: [
+            ...(state.payments || []),
+            action.payment,
+          ]
+        }
+      case actions.PAYMENT_GET_SUCCESS:
+        return {
+          ...state,
+          payments: action.payments,
+        }
+      case ROOM_LEAVE:
+        return {
+          ...initialState,
+        }
+      case ROOM_SET_MEMBER:
+        return {
+          ...state,
+          sendlist: action.sendlist,
+          getlist: action.getlist,
+        }
       default:
         return state
     }
