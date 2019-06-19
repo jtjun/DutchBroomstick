@@ -12,5 +12,7 @@ matrix:
         - pipenv run python src/manage.py test
     - language: node_js
       node_js: 8
+      install:
+        - yarn install
       before_install:
         - cd frontend

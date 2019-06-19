@@ -1,3 +1,4 @@
+import { USER_SIGNOUT } from 'store/actions'
 import * as actions from './actions';
 
 const initialState = {
@@ -42,6 +43,10 @@ const initialState = {
 
 const roomReducer = (state = initialState, action) => {
   switch(action.type) {
+    case USER_SIGNOUT:
+      return {
+        ...initialState,
+      }
     case actions.ROOM_CREATE_REQUEST:
       return {
         ...state,
