@@ -59,9 +59,6 @@ const RoomPage = props => {
         (<PaymentList />) :
         (members && <MemberList />)
       }
-      <Block transparent>
-        <a>로그아웃</a>
-      </Block>
     </div>
   )
 }
