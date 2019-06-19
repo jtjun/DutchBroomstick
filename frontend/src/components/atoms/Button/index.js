@@ -15,6 +15,7 @@ const Button = styled.button`
   padding: 4px 15px;
   width: 100%;
   max-width: 224px;
+  z-index: 1;
 `
 
 const LightButton = styled(Button)`

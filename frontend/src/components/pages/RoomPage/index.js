@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import { Block, Button, Graph, List, LinkButton, ListItem, Header } from 'components'
 import { MemberList, PaymentList } from 'containers'
@@ -17,6 +18,7 @@ const SettingButton = styled(LinkButton)`
   height: 32px;
   width: 32px;
   cursor: pointer;
+  z-index: 1;
 `
 
 const RoomPage = props => {
@@ -47,8 +49,11 @@ const RoomPage = props => {
 
   return (
     <div>
-      <Header />
+      <Header />      
       <Block transparent>
+        <CopyToClipboard text={window.location.href} onCopy={() => {}}>
+          <Button>링크 복사</Button>
+        </CopyToClipboard>
         <Graph graph={graph} events={events} />
         <SettingButton to={`/room/${room.url}/setting/`} />
       </Block>
