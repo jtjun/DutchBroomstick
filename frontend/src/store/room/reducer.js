@@ -49,7 +49,7 @@ const roomReducer = (state = initialState, action) => {
     case actions.ROOM_CREATE_SUCCESS:
       return {
         ...state,
-        room: action.room,
+        // room: action.room,
         roomList: [
           ...state.roomList,
           action.room,
