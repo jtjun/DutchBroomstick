@@ -15,7 +15,7 @@ const PaymentList = ({ paymentlist, roomurl }) => (
         {
           paymentlist && paymentlist.map(
             ({ forWhat, fromWho, total }, idx) => (
-              <ListItem key={idx} title={`${forWhat}${fromWho}`} description={total} linkTo={`/room/:${roomurl}/payment_list/${forWhat}`} />
+              <ListItem key={idx} title={`${forWhat}${fromWho}`} description={total} linkTo={`/room/${roomurl}/payment_list/${forWhat}`} />
             )
           )
         }

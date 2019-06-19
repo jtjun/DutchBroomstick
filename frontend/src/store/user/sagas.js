@@ -1,3 +1,4 @@
+import { push, replace } from 'connected-react-router'
 import { fork, takeEvery, put } from 'redux-saga/effects'
 import api from 'services/api'
 
@@ -54,6 +55,7 @@ function* userInfoChangeRequest({ username, password, default_nickname, default_
       console.log(username , password, default_nickname, default_account)
       const response = yield api.put(`/users/${username}/`, { username, password, default_nickname, default_account }, { token })
       yield put(userInfoChangeSuccess(password, default_nickname, default_account))
+      yield put(replace(`/`))
     } catch (e){
       yield put(userInfoChangeFailed(yield e.response.json()))
     }
