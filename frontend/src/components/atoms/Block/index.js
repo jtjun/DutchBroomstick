@@ -1,11 +1,18 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
+
+const alignItems = ({direction}) => (
+  direction === 'column' ?
+  'center' : 'baseline'
+)
 
 const Block = styled.div`
   background-color: ${props => props.transparent ? "transparent" : "white"};
   border: ${props => props.transparent ? "none" : "thin solid #bfbfbf"};
   display: flex;
-  flex-direction: ${props => props.direction || "column"};
-  align-items: center;
+  flex-direction: ${({direction}) => direction};
+  justify-content: space-between;
+  align-items: ${alignItems};
   margin: 0.5em auto 0;
   padding: 1em 20px;
   max-width: 310px;
@@ -16,5 +23,9 @@ const Block = styled.div`
     text-decoration: none;
   }
 `
+
+Block.defaultProps = {
+  direction: 'column',
+}
 
 export default Block

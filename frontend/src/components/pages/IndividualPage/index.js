@@ -33,8 +33,8 @@ const IndividualPage = ({ sendlist, getlist, roomurl, nickname }) => (
             <List>
                 {
                     getlist && getlist.map(
-                        ({ to, label }, idx) => (
-                            <ListItem key={idx} title={to} description={label} />
+                        ({ from, label }, idx) => (
+                            <ListItem key={idx} title={from} description={label} />
                         )
                     )
                 }

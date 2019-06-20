@@ -25,8 +25,10 @@ class UserDetailView(generics.RetrieveUpdateAPIView):
 
 class RoomListCreateView(generics.ListCreateAPIView):
     permission_classes = (CheckUsername,)
-    queryset = Room.objects.all()
     serializer_class = RoomSerializer
+
+    def get_queryset(self):
+        return Room.objects.filter(owner=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

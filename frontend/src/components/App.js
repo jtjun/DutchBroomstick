@@ -29,7 +29,8 @@ const App = () => {
         <Route path="/user/setting/" component={UserInfoPage} exact  />
         <Route path="/user/create_room/" component={RoomCreatePage} exact  />
         <Route path="/user/:room_id/entrance/" component={EntrancePage} />
-        <Route path="/room/:room_id/payment/" component={PaymentPage} />
+        <Route path="/room/:room_id/payment/" component={PaymentPage} exact />
+        <Route path="/room/:room_id/payment/:payment_id/" component={PaymentPage} exact />
         <Route path="/room/:room_id/setting/" component={RoomSettingPage} />
         <Route path="/room/:room_id/member/:member/" component={IndividualPage} exact />
         <Route path="/room/:room_id/member/:member/:to" component={AccountPage} />
