@@ -51,14 +51,33 @@ const RoomPage = props => {
       <Header />      
       <Block transparent>
         <CopyToClipboard text={window.location.href} onCopy={() => {}}>
-          <Button>링크 복사</Button>
+          <Button width="auto" horizontal
+            style={{
+              'align-self': 'flex-end',
+              margin: '0 0 -2em'
+            }}
+          >
+            링크 복사
+          </Button>
         </CopyToClipboard>
         <Graph graph={graph} events={events} />
         <SettingButton to={`/room/${room.url}/setting/`} />
       </Block>
-      <Button onClick={onToggle}>
-        {showPayment ? "멤버 목록 보기" : "결제 목록 보기"}
-      </Button>
+      <Block direction="row" transparent
+        style={{margin: '0 auto', padding: '0'}}
+      >
+        <Button onClick={onToggle} width="auto" horizontal>
+          {showPayment ? "멤버 목록" : "결제 목록"}
+        </Button>
+        <h2 style={{
+          margin: '0 0.5em',
+          padding: '0 0.25em',
+          'border-bottom': 'solid',
+          color: 'dimgrey',
+        }}>
+          {room.roomname}
+        </h2>
+      </Block>
       {showPayment ?
         (<PaymentList />) :
         (members && <MemberList />)

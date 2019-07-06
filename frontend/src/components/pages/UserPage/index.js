@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-import { Block, Button, Header, List, ListItem } from 'components'
+import { Block, Button, Header, List, LinkButton, ListItem } from 'components'
 
 /**
  * Presentational Components의 경우 redux 로직을 배제한다 (cf. pages/MainPage/index.js)
@@ -13,9 +13,9 @@ const UserPage = ({username, roomList, onClickUserInfo, onClickSignOut}) => (
     <Header />
     <Block transparent>
       <h1>{username}</h1>
-      <Link to="/user/setting/">
-        <button onClick={onClickUserInfo}>유저 정보</button>
-      </Link>
+      <LinkButton to="/user/setting/" onClick={onClickUserInfo} width="auto">
+        유저 정보
+      </LinkButton>
     </Block>
     <Block>
       새로운 방을 원한다면?

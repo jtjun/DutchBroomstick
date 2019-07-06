@@ -11,7 +11,6 @@ const Wrapper = styled.div`
   padding-top: 100%;
   width: 100%;
   position: relative;
-  z-index: -1;
 `
 
 const Content = styled.div`

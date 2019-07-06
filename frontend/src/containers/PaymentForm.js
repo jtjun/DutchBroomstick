@@ -45,25 +45,41 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  nBbang(total, members) {
-    const amount = total / members.length
+  set1OverN(total, members) {
+    const amount = Math.floor(total / members.length)
     members.forEach(
       (m, index) => 
       dispatch(change(FORM_NAME, `credits[${index}].amount`, amount))
     )
-  }
+  },
+  setRandom(total, members) {
+    const rand = members.map(() => Math.random())
+    const sum = rand.reduce((a, b) => (a + b), 0)
+    
+    rand.map(x => Math.floor(total * x / sum)).forEach(
+      (r, index) =>
+      dispatch(change(FORM_NAME, `credits[${index}].amount`, r))
+    )
+  },
 })
 
-const PaymentFormContainer = ({...props}) => {
-  const initialValues = {
-    credits: props.members.map(
-      ({ membername }) => ({ toWho: membername, amount: 0.0 })
-    ),
-    room: props.room,
-  } 
+const PaymentFormContainer = ({payment, ...props}) => {
+  const initialValues = (payment ? 
+    {  // if payment exists
+      ...payment,
+      room: props.room,
+    } :
+    {  // if payment doesn't exist
+      credits: props.members.map(
+        ({ membername }) => ({ toWho: membername, amount: 0.0 })
+      ),
+      room: props.room,
+    }
+  )
 
   return (
     <PaymentReduxForm
+      disabled={!!payment}
       initialValues={initialValues}
       {...props}
     />

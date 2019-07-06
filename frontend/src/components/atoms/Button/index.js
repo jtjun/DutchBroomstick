@@ -13,10 +13,24 @@ const Button = styled.button`
   font-size: 1em;
   margin: ${({ horizontal }) => horizontal ? "0 0.5em" : "0.5em auto 0"};
   padding: 4px 15px;
-  width: 100%;
+  width: ${({ width }) => width};
   max-width: 224px;
   z-index: 1;
+
+  :disabled {
+    background-color: lightgrey;
+    color: grey;
+    cursor: default;
+  }
 `
+
+Button.defaultProps = {
+  width: '100%',
+}
+
+Button.propTypes = {
+  width: PropTypes.string.isRequired,
+}
 
 const LightButton = styled(Button)`
   background: white;
