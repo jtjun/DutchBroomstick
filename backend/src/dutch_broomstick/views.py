@@ -23,6 +23,20 @@ class UserDetailView(generics.RetrieveUpdateAPIView):
     lookup_field = 'username'
 
 
+class UserListCreateView(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def list(self, request):
+        # Note the use of `get_queryset()` instead of `self.queryset`
+        queryset = self.get_queryset()
+        serializer = UserSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def get_queryset(self):
+        return self.list(self.request)
+
+
 class RoomListCreateView(generics.ListCreateAPIView):
     permission_classes = (CheckUsername,)
     queryset = Room.objects.all()
@@ -73,7 +87,7 @@ class MemberListCreateView(RoomMixin, generics.ListCreateAPIView):
         serializer.save(room=room, user=user)
 
 
-class MemberDetailView(generics.RetrieveAPIView):
+class MemberDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Member.objects.all()
     serializer_class = MemberSerializer
     lookup_field = 'membername'
@@ -99,7 +113,7 @@ class PaymentCreateView(RoomMixin, generics.ListCreateAPIView):
 
         room = self.get_room()
         layer = room.layer_set.get(number=kwargs['number'])
-        
+
         return Payment.objects.filter(layer=layer)
 
     def get_member(self, membername, room=None):
