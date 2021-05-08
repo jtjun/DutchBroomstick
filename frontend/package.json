@@ -88,7 +88,7 @@
     "connected-react-router": "^6.4.0",
     "history": "^4.6.1",
     "jest": "^24.8.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.21",
     "normalizr": "3.2.4",
     "prop-types": "^15.5.8",
     "query-string": "^5.0.0",
